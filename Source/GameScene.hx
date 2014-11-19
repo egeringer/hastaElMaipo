@@ -12,12 +12,13 @@ import engine.*;
  */
 class GameScene extends Scene {
 
-	private var avion:Zulma;
+	private var zulma:Zulma;
 	public var enemigos(default,null):Array<Enemigo>;
 	public var enemigosActivos(default,null):Array<Enemigo>;
 	private var fondo1:FondoAnimado;
 	private var fondo2:FondoAnimado;
 	private var fondo3:FondoAnimado;
+	private var fondo4:FondoAnimado;
 	private var enemyTimer:Float;
 	var backBtn:Boton;
 
@@ -26,28 +27,31 @@ class GameScene extends Scene {
 
 		backBtn=new Boton(0xFFFFFF,20,20,"images/pausa.png",function(_){HastaElMaipo.getInstance().setScene('menu');} );
 
-		fondo1=new FondoAnimado('images/background-1.png',2);
-		fondo2=new FondoAnimado('images/background-3.png',10);
-		fondo3=new FondoAnimado('images/background-4.png',150);
+		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
+		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
+		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
+		fondo4 = new FondoAnimado('images/bkg-1.png', 100);
 		
 		addChild(fondo1);
 		addChild(fondo2);
 		addChild(fondo3);
+		addChild(fondo4);
 
 		hijos.push(fondo1);
 		hijos.push(fondo2);
 		hijos.push(fondo3);
+		hijos.push(fondo4);
 
 		enemigos=new Array<Enemigo>();
 		enemigosActivos=new Array<Enemigo>();
 		//Cargo los enemigos
 		for(i in 0 ... 10) enemigos.push(new Enemigo(this));			
 
-		avion = new Zulma(this);
+		zulma = new Zulma(this);
 		
 		// Los coloco en Pantalla
-		this.addChild(avion);
-		hijos.push(avion);
+		this.addChild(zulma);
+		hijos.push(zulma);
 
 		enemyTimer=0;
 
