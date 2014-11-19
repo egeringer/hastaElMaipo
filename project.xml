@@ -2,13 +2,15 @@
 <project>
 	
 	<meta title="HastaElMaipo" package="com.sample.project" version="1.0.0" company="Company Name" />
-	<app main="Main" path="Export" file="HastaElMaipo" />
+	<app main="HastaElMaipo" path="Export" file="HastaElMaipo" />
 	
 	<source path="Source" />
-	
+	<window width="720" height="400" fps="60" background="#000000" />
 	<haxelib name="openfl" />
 	
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
+	<assets path="Assets/images" rename="images" include="*" />
+	
 	<icon path="Assets/openfl.svg" />
 	
 </project>
