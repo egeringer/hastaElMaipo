@@ -28,7 +28,7 @@ class Enemigo extends GameElement{
 
 	public function atack(){
 		this.x=1000;
-		this.y=scene.height-this.height;
+		this.y=scene.height-this.height-40;
 		this.estado=1;
 		scene.hijos.push(this);
 		scene.addChild(this);

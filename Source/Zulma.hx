@@ -19,7 +19,7 @@ class Zulma extends GameElement{
 		caminando = new Animation( Assets.getBitmapData ("images/zulma_corriendo_small.png"), 16, 1);
 		this.addChild(caminando);
 		this.x=50;
-		this.y = scene.height - this.height;
+		this.y = scene.height - this.height - 40;
 		trace(scene.height);
 		hijos.push(caminando);
 		

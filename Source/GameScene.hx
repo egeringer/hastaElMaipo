@@ -30,7 +30,7 @@ class GameScene extends Scene {
 		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
-		fondo4 = new FondoAnimado('images/bkg-1.png', 100);
+		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
 		
 		addChild(fondo1);
 		addChild(fondo2);
