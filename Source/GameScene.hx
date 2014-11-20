@@ -63,7 +63,7 @@ class GameScene extends Scene {
 		enemyTimer-=time;
 
 		if(enemyTimer<0){
-			enemyTimer=Std.random(1)+1;
+			enemyTimer=Std.random(3)+2;
 			if(enemigos.length>0) enemigos.pop().atack();
 		}
        	
