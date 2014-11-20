@@ -24,6 +24,7 @@ class GameScene extends Scene {
 	
 	//Agregado Cristian
 	public var powerUps(default, null):Array<PowerUp>;
+	public var powersActivos(default, null):Array<PowerUp>;
 	var powerTimer:Float;
 	//FIN Agregado Cristian
 
@@ -49,17 +50,18 @@ class GameScene extends Scene {
 		
 		//Agregado Cristian
 		powerUps = new Array<PowerUp>();
-		for (i in 0 ... 1) {
+		for (i in 0 ... 4) {
 			powerUps.push(new PowerUp(this, "images/power_defense.png", 200));
 			powerUps.push(new PowerUp(this, "images/power_velocity.png", 200));
 		}
+		powersActivos = new Array<PowerUp>();
 		powerTimer = 0;
 		//FIN Agregado Cristian
 
-		enemigos=new Array<Enemigo>();
-		enemigosActivos=new Array<Enemigo>();
+		enemigos = new Array<Enemigo>();
+		enemigosActivos = new Array<Enemigo>();
 		//Cargo los enemigos
-		for (i in 0 ... 10) enemigos.push(new Enemigo(this));
+		for (i in 0 ... 10) enemigos.push(new Enemigo(this, 200));
 		zulma = new Zulma(this);
 		
 		// Los coloco en Pantalla
@@ -81,12 +83,12 @@ class GameScene extends Scene {
 			if(enemigos.length>0) enemigos.pop().atack();
 		}
 		
-				//Agregado Cristian
+		//Agregado Cristian
 		powerTimer -= time;
 		if (powerTimer < 0) {
 			powerTimer = Std.random(5) + 5;
 			if (powerUps.length > 0)
-				powerUps.pop().show();
+				powerUps.pop().mostrar();
 		}
        	
 	}

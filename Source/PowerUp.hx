@@ -9,37 +9,41 @@ import openfl.display.Bitmap;
  */
 class PowerUp extends GameElement {
 	
-	var scene:GameScene;
+	var escena:GameScene;
 	var bitmapPower:Bitmap;
-	var velocity:Float;
+	var velocidad:Float;
 	
-	public function new(escena:GameScene, nombrePower:String, velocidad:Float) {
+	public function new(scene:GameScene, namePower:String, speed:Float) {
 		super();
-		scene = escena;
-		velocity = velocidad;
-		bitmapPower = new Bitmap(Assets.getBitmapData(nombrePower));
+		escena = scene;
+		velocidad = speed;
+		bitmapPower = new Bitmap(Assets.getBitmapData(namePower));
 		this.addChild(bitmapPower);
 	}
 	
-	public function die() {
-		scene.powerUps.push(this);
-		scene.hijos.remove(this);
-		scene.removeChild(this);
+	public function reciclar() {
+		escena.powerUps.push(this);
+		escena.hijos.remove(this);
+		escena.removeChild(this);
+		escena.powersActivos.remove(this);
 	}
 	
-	public function show() {
+	public function mostrar() {
 		this.x = 1000;
-		this.y = Std.random(300);
+		this.y = Std.random (Std.random(200)) + 200;
 		
-		scene.hijos.push(this);
-		scene.addChild(this);
+		trace(this.y);
+		
+		escena.hijos.push(this);
+		escena.addChild(this);
+		escena.powersActivos.push(this);
 	}
 	
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
-		this.x -= time * velocity;
+		this.x -= time * velocidad;
 		if (this.x < -100)
-			die();
+			reciclar();
 	}
 	
 }

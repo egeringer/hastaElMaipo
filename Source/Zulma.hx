@@ -86,17 +86,24 @@ class Zulma extends GameElement{
 		*/
        	// Colision contra asteroide e inmunidad post-colision
        	if(inmunidad>0){
-       		inmunidad-=time;
-       		this.alpha=0.1;
+       		inmunidad -= time;
+       		this.alpha = 0.1;
        	}else{
-       		this.alpha=1;
+       		this.alpha = 1;
        		for(enemigo in scene.enemigosActivos){
 		       	if(GameScene.detectarColision(this,enemigo)){
-		       		inmunidad=6;
+		       		inmunidad = 6;
+					//trace("Choco enemigo");
 		       		//sound.play();
 		       	}       			
        		}
        	}
+		for (power in scene.powersActivos) {
+			if (GameScene.detectarColision(this, power)) {
+				power.reciclar(); //Desaparece power al haber colision (Y)
+				//trace("Choco power-up");
+			}
+		}
 		
 	}
 

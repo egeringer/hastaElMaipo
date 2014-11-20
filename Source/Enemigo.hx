@@ -14,14 +14,16 @@ class Enemigo extends GameElement{
 	var volando:Animation;
 	var scene:GameScene;
 	var numero:Int;
+	var velocidad:Float;
 	
-	public function new (scene:GameScene) {
+	public function new (scene:GameScene, speed:Float) {
 		super();
 		numero = Std.random(4) + 1;
 		volando = new Animation( Assets.getBitmapData("images/brainy_idle_"+numero+".png"), 1, 8);
 		this.addChild(volando);
 		this.hijos.push(volando);
-		this.scene=scene;
+		this.scene = scene;
+		this.velocidad = speed;
 	}
 
 	public function die(){
@@ -33,8 +35,8 @@ class Enemigo extends GameElement{
 	}
 
 	public function atack(){
-		this.x=1000;
-		this.y=scene.height-this.height-40;
+		this.x = 1000;
+		this.y = scene.height-this.height-40;
 		this.estado=1;
 		scene.hijos.push(this);
 		scene.addChild(this);
@@ -42,10 +44,10 @@ class Enemigo extends GameElement{
 	}
 	
 	override public function updateLogic(time:Float){
-		if(estado==0) return;
+		if(estado == 0) return;
 		super.updateLogic(time);
-		x-=time*200;
-		if(x<-100) die();
+		x -= time * velocidad;
+		if(x < -100) die();
 	}
 
 }
