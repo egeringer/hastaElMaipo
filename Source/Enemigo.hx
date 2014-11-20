@@ -9,10 +9,12 @@ class Enemigo extends GameElement{
 	
 	var volando:Animation;
 	var scene:GameScene;
-
+	var numero:Int;
+	
 	public function new (scene:GameScene) {
 		super();
-		volando = new Animation( Assets.getBitmapData("images/brainy_idle.png"), 1, 8);
+		numero = Std.random(4) + 1;
+		volando = new Animation( Assets.getBitmapData("images/brainy_idle_"+numero+".png"), 1, 8);
 		this.addChild(volando);
 		this.hijos.push(volando);
 		this.scene=scene;

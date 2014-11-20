@@ -45,8 +45,7 @@ class GameScene extends Scene {
 		enemigos=new Array<Enemigo>();
 		enemigosActivos=new Array<Enemigo>();
 		//Cargo los enemigos
-		for(i in 0 ... 10) enemigos.push(new Enemigo(this));			
-
+		for (i in 0 ... 10) enemigos.push(new Enemigo(this));
 		zulma = new Zulma(this);
 		
 		// Los coloco en Pantalla
@@ -64,7 +63,7 @@ class GameScene extends Scene {
 		enemyTimer-=time;
 
 		if(enemyTimer<0){
-			enemyTimer=Std.random(3)+2;
+			enemyTimer=Std.random(1)+1;
 			if(enemigos.length>0) enemigos.pop().atack();
 		}
        	
