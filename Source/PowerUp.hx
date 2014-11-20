@@ -21,7 +21,7 @@ class PowerUp extends GameElement {
 		this.addChild(bitmapPower);
 	}
 	
-	public function reciclar() {
+	public function consumir() {
 		escena.powerUps.push(this);
 		escena.hijos.remove(this);
 		escena.removeChild(this);
@@ -31,9 +31,6 @@ class PowerUp extends GameElement {
 	public function mostrar() {
 		this.x = 1000;
 		this.y = Std.random (Std.random(200)) + 200;
-		
-		trace(this.y);
-		
 		escena.hijos.push(this);
 		escena.addChild(this);
 		escena.powersActivos.push(this);
@@ -43,7 +40,7 @@ class PowerUp extends GameElement {
 		super.updateLogic(time);
 		this.x -= time * velocidad;
 		if (this.x < -100)
-			reciclar();
+			consumir();
 	}
 	
 }

@@ -12,42 +12,43 @@ import engine.*;
 class Enemigo extends GameElement{
 	
 	var volando:Animation;
-	var scene:GameScene;
+	var escena:GameScene;
 	var numero:Int;
 	var velocidad:Float;
 	
 	public function new (scene:GameScene, speed:Float) {
 		super();
 		numero = Std.random(4) + 1;
-		volando = new Animation( Assets.getBitmapData("images/brainy_idle_"+numero+".png"), 1, 8);
+		volando = new Animation(Assets.getBitmapData("images/brainy_idle_"+numero+".png"), 1, 8);
 		this.addChild(volando);
 		this.hijos.push(volando);
-		this.scene = scene;
-		this.velocidad = speed;
+		escena = scene;
+		velocidad = speed;
 	}
 
-	public function die(){
+	public function morir(){
 		estado=0;
-		scene.enemigos.push(this);
-		scene.enemigosActivos.remove(this);
-		scene.hijos.remove(this);
-		scene.removeChild(this);		
+		escena.enemigos.push(this);
+		escena.enemigosActivos.remove(this);
+		escena.hijos.remove(this);
+		escena.removeChild(this);		
 	}
 
-	public function atack(){
+	public function atacar(){
 		this.x = 1000;
-		this.y = scene.height-this.height-40;
+		this.y = escena.height-this.height-40;
 		this.estado=1;
-		scene.hijos.push(this);
-		scene.addChild(this);
-		scene.enemigosActivos.push(this);
+		escena.hijos.push(this);
+		escena.addChild(this);
+		escena.enemigosActivos.push(this);
 	}
 	
 	override public function updateLogic(time:Float){
-		if(estado == 0) return;
+		if (estado == 0) return;
 		super.updateLogic(time);
-		x -= time * velocidad;
-		if(x < -100) die();
+		this.x -= time * velocidad;
+		if (this.x < -100) 
+			morir();
 	}
 
 }

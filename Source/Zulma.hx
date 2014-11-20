@@ -8,22 +8,22 @@ class Zulma extends GameElement{
 	
 	var caminando:Animation;
 	private var inmunidad:Float;
-	var scene:GameScene;
+	var escena:GameScene;
 	var shootTimer:Float;
 	var salto:Float;
 	
 	public function new (scene:GameScene) {
 		super();
 
-		this.scene=scene;
+		escena = scene;
 		caminando = new Animation( Assets.getBitmapData ("images/zulma_corriendo_small.png"), 16, 1);
 		this.addChild(caminando);
-		this.x=50;
-		this.y = scene.height - this.height - 40;
-		trace(scene.height);
+		this.x = 50;
+		this.y = escena.height - this.height - 40;
+		trace(escena.height);
 		hijos.push(caminando);
 		
-		inmunidad=0;
+		inmunidad = 0;
 		shootTimer = 0;
 		salto = 13;
 		estado = 0; //Caminando
@@ -85,23 +85,23 @@ class Zulma extends GameElement{
 		}
 		*/
        	// Colision contra asteroide e inmunidad post-colision
-       	if(inmunidad>0){
+       	if (inmunidad > 0) {
        		inmunidad -= time;
        		this.alpha = 0.1;
-       	}else{
+       	} else {
        		this.alpha = 1;
-       		for(enemigo in scene.enemigosActivos){
-		       	if(GameScene.detectarColision(this,enemigo)){
+       		for (enemigo in escena.enemigosActivos) {
+		       	if (GameScene.detectarColision(this,enemigo)) {
 		       		inmunidad = 6;
 					//trace("Choco enemigo");
 		       		//sound.play();
 		       	}       			
        		}
        	}
-		for (power in scene.powersActivos) {
+		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {
-				power.reciclar(); //Desaparece power al haber colision (Y)
-				//trace("Choco power-up");
+				power.consumir(); //Desaparece power al haber colision (Y)
+
 			}
 		}
 		
