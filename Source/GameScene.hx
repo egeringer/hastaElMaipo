@@ -21,6 +21,11 @@ class GameScene extends Scene {
 	private var fondo4:FondoAnimado;
 	private var enemyTimer:Float;
 	var backBtn:Boton;
+	
+	//Agregado Cristian
+	public var powerUps(default, null):Array<PowerUp>;
+	var powerTimer:Float;
+	//FIN Agregado Cristian
 
 	public function new () {
 		super();
@@ -41,6 +46,15 @@ class GameScene extends Scene {
 		hijos.push(fondo2);
 		hijos.push(fondo3);
 		hijos.push(fondo4);
+		
+		//Agregado Cristian
+		powerUps = new Array<PowerUp>();
+		for (i in 0 ... 1) {
+			powerUps.push(new PowerUp(this, "images/power_defense.png", 200));
+			powerUps.push(new PowerUp(this, "images/power_velocity.png", 200));
+		}
+		powerTimer = 0;
+		//FIN Agregado Cristian
 
 		enemigos=new Array<Enemigo>();
 		enemigosActivos=new Array<Enemigo>();
@@ -65,6 +79,14 @@ class GameScene extends Scene {
 		if(enemyTimer<0){
 			enemyTimer=Std.random(3)+2;
 			if(enemigos.length>0) enemigos.pop().atack();
+		}
+		
+				//Agregado Cristian
+		powerTimer -= time;
+		if (powerTimer < 0) {
+			powerTimer = Std.random(5) + 5;
+			if (powerUps.length > 0)
+				powerUps.pop().show();
 		}
        	
 	}
