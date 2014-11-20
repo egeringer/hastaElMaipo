@@ -4,6 +4,10 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import engine.*;
 
+//TODO: 
+//Parametrizar velocidad
+//Agregar Callback
+//Pasar todos los metodos a castellano
 
 class Enemigo extends GameElement{
 	
