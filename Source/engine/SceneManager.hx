@@ -21,7 +21,6 @@ class SceneManager extends GameElement {
 		sceneMap=new Map<String,Scene>();
 	}
 
-
 	public function setScene(name:String){
 		if(!sceneMap.exists(name)){
 			trace(sceneMap);

@@ -4,7 +4,7 @@ import flash.display.Sprite;
 import flash.Lib;
 import flash.display.Bitmap;
 import openfl.Assets;
-import flash.media.Sound;
+
 import engine.*;
 /**
  * ...
@@ -21,7 +21,10 @@ class GameScene extends Scene {
 	private var fondo4:FondoAnimado;
 	private var enemyTimer:Float;
 	var backBtn:Boton;
-
+	private var sound:flash.media.Sound;
+	private var sound2:flash.media.Sound;
+	private var soundManager:SoundManager;
+	
 	public function new () {
 		super();
 
@@ -31,6 +34,12 @@ class GameScene extends Scene {
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
 		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
+		
+		soundManager = SoundManager.getInstance();
+		sound = Assets.getSound ("main");	
+		soundManager.addSound("main", sound);
+		sound2 = Assets.getSound ("tic");	
+		soundManager.addSound("tic", sound2);
 		
 		addChild(fondo1);
 		addChild(fondo2);

@@ -40,7 +40,8 @@ class MenuScene extends Scene {
 
 	public function play(_){
 		HastaElMaipo.getInstance().setScene('game');
-	}
+		SoundManager.getInstance().playSound("main");
+		}
 
 	public function help(_){
 		HastaElMaipo.getInstance().setScene('help');

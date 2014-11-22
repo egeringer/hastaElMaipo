@@ -10,7 +10,18 @@
 	
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
 	<assets path="Assets/images" rename="images" include="*" />
+	<assets path="Assets/sounds" rename="sounds" include="*" />
 	
 	<icon path="Assets/openfl.svg" />
+	
+	 <assets path="Assets/sounds" rename="sounds" if="web">
+            <sound path="main.mp3" id="main" />
+			<sound path="3.mp3" id="tic" />
+    </assets>
+    <assets path="Assets/sounds" rename="sounds" unless="web">
+            <sound path="main.wav" id="main" />
+			<sound path="3.wav" id="tic" />
+    </assets>
+
 	
 </project>
