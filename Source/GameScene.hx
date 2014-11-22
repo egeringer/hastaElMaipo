@@ -24,11 +24,16 @@ class GameScene extends Scene {
 	private var sound:flash.media.Sound;
 	private var sound2:flash.media.Sound;
 	private var soundManager:SoundManager;
-	
+	//Agregado Cristian
+	public var powerUps(default, null):Array<PowerUp>;
+	public var powersActivos(default, null):Array<PowerUp>;
+	var powerTimer:Float;
+	//FIN Agregado Cristian
+
 	public function new () {
 		super();
 
-		backBtn=new Boton(0xFFFFFF,20,20,"images/pausa.png",function(_){HastaElMaipo.getInstance().setScene('menu');} );
+		backBtn=new Boton(0xFFFFFF,20,20,"images/pausa.png",function(_){HastaElMaipo.getInstance().setScene('menu');});
 
 		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
@@ -50,12 +55,21 @@ class GameScene extends Scene {
 		hijos.push(fondo2);
 		hijos.push(fondo3);
 		hijos.push(fondo4);
+		
+		//Agregado Cristian
+		powerUps = new Array<PowerUp>();
+		for (i in 0 ... 4) {
+			powerUps.push(new PowerUp(this, "images/power_defense.png", 200));
+			powerUps.push(new PowerUp(this, "images/power_velocity.png", 200));
+		}
+		powersActivos = new Array<PowerUp>();
+		powerTimer = 0;
+		//FIN Agregado Cristian
 
-		enemigos=new Array<Enemigo>();
-		enemigosActivos=new Array<Enemigo>();
+		enemigos = new Array<Enemigo>();
+		enemigosActivos = new Array<Enemigo>();
 		//Cargo los enemigos
-		for(i in 0 ... 10) enemigos.push(new Enemigo(this));			
-
+		for (i in 0 ... 10) enemigos.push(new Enemigo(this, 200));
 		zulma = new Zulma(this);
 		
 		// Los coloco en Pantalla
@@ -70,19 +84,28 @@ class GameScene extends Scene {
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
        	       	
-		enemyTimer-=time;
+		enemyTimer -= time;
 
-		if(enemyTimer<0){
-			enemyTimer=Std.random(3)+2;
-			if(enemigos.length>0) enemigos.pop().atack();
+		if (enemyTimer < 0) {
+			enemyTimer = Std.random(3)+2;
+			if (enemigos.length > 0) 
+				enemigos.pop().atacar();
+		}
+		
+		//Agregado Cristian
+		powerTimer -= time;
+		if (powerTimer < 0) {
+			powerTimer = Std.random(5) + 5;
+			if (powerUps.length > 0)
+				powerUps.pop().mostrar();
 		}
        	
 	}
 
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.
-    public static function detectarColision(obj1:GameElement,obj2:GameElement):Bool{
-		if(obj1.x+obj1.width>obj2.x && obj1.x<obj2.x+obj2.width){
-		   	if(obj1.y+obj1.height>obj2.y && obj1.y<obj2.y+obj2.height){
+    public static function detectarColision(obj1:GameElement,obj2:GameElement):Bool {
+		if (obj1.x + obj1.width > obj2.x && obj1.x < obj2.x + obj2.width) {
+		   	if (obj1.y + obj1.height > obj2.y && obj1.y < obj2.y + obj2.height) {
 		   		return true;
 		   	}
 		}
