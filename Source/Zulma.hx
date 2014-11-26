@@ -99,19 +99,12 @@ class Zulma extends GameElement{
 		*/
 		
        	// Colision contra asteroide e inmunidad post-colision
-       	if (inmunidad > 0) {
-       		inmunidad -= time;
-       		this.alpha = 0.1;
-       	} else {
-       		this.alpha = 1;
        		for (enemigo in escena.enemigosActivos) {
 		       	if (GameScene.detectarColision(this,enemigo)) {
-		       		inmunidad = 6;
-					//trace("Choco enemigo");
-		       		//sound.play();
+		       		SoundManager.getInstance().playSound("tic");
 		       	}       			
        		}
-       	}
+			
 		if (tiempoEfecto > 0) {
 			trace(tiempoEfecto);
 			tiempoEfecto -= time;
