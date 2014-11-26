@@ -3,10 +3,6 @@ import engine.GameElement;
 import openfl.Assets;
 import openfl.display.Bitmap;
 
-/**
- * ...
- * @author ...
- */
 class PowerUp extends GameElement {
 	
 	var escena:GameScene;

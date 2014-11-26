@@ -11,6 +11,7 @@ class Zulma extends GameElement{
 	var escena:GameScene;
 	var shootTimer:Float;
 	var salto:Float;
+	var cantVidas:Int;
 	
 	public function new (scene:GameScene) {
 		super();
@@ -25,12 +26,17 @@ class Zulma extends GameElement{
 		
 		inmunidad = 0;
 		shootTimer = 0;
+		cantVidas = 1;
 		salto = 13;
 		estado = 0; //Caminando
 	}	
 	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
+		
+		
+		//Me mori, me voy a escena de muerte
+		if (cantVidas < 1) HastaElMaipo.getInstance().setScene('die');
 
 		if(InputManager.getInstance().keyPressed('W')){
 			if (estado != 1) {
@@ -49,7 +55,6 @@ class Zulma extends GameElement{
 				this.y += 13*0.5;
 			}
 		}
-		
 		
 		/*
 		if(InputManager.getInstance().keyPressed('S')){
@@ -84,20 +89,15 @@ class Zulma extends GameElement{
 			}
 		}
 		*/
-       	// Colision contra asteroide e inmunidad post-colision
-       	if (inmunidad > 0) {
-       		inmunidad -= time;
-       		this.alpha = 0.1;
-       	} else {
-       		this.alpha = 1;
-       		for (enemigo in escena.enemigosActivos) {
-		       	if (GameScene.detectarColision(this,enemigo)) {
-		       		inmunidad = 6;
-					//trace("Choco enemigo");
-		       		//sound.play();
-		       	}       			
-       		}
-       	}
+		
+       	// Colision contra enemigos
+		for (enemigo in escena.enemigosActivos) {
+			if (GameScene.detectarColision(this, enemigo)) {
+				SoundManager.getInstance().playSound("tic");
+				cantVidas--;
+			}       			
+		}
+			
 		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {
 				power.consumir(); //Desaparece power al haber colision (Y)

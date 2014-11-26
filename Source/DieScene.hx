@@ -10,7 +10,7 @@ import engine.*;
  * ...
  * @author fbricker
  */
-class MenuScene extends Scene {
+class DieScene extends Scene {
 
 	var jugar:Boton;
 	var ayuda:Boton;
@@ -19,7 +19,7 @@ class MenuScene extends Scene {
 	public function new(){
 		super();
 		
-		title = new Bitmap(Assets.getBitmapData("images/title.png"));
+		title = new Bitmap(Assets.getBitmapData("images/perdiste.png"));
 			
 		jugar=new Boton(0xFF0000,300,100,"images/jugar.png",play);
 		ayuda=new Boton(0x00FF00,300,100,"images/ayuda.png",help);
@@ -34,7 +34,7 @@ class MenuScene extends Scene {
 		jugar.x=0;
 		jugar.y=200;
 
-		ayuda.x=this.width-ayuda.width;
+		ayuda.x=400;
 		ayuda.y=200;
 	}
 

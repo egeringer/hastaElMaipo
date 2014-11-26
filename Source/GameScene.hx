@@ -6,10 +6,6 @@ import flash.display.Bitmap;
 import openfl.Assets;
 
 import engine.*;
-/**
- * ...
- * @author fbricker
- */
 class GameScene extends Scene {
 
 	private var zulma:Zulma;
@@ -20,10 +16,9 @@ class GameScene extends Scene {
 	private var fondo3:FondoAnimado;
 	private var fondo4:FondoAnimado;
 	private var enemyTimer:Float;
-	var backBtn:Boton;
-	private var sound:flash.media.Sound;
-	private var sound2:flash.media.Sound;
-	private var soundManager:SoundManager;
+	private var backBtn:Boton;
+	private var score = 0;
+
 	//Agregado Cristian
 	public var powerUps(default, null):Array<PowerUp>;
 	public var powersActivos(default, null):Array<PowerUp>;
@@ -39,12 +34,6 @@ class GameScene extends Scene {
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
 		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
-		
-		soundManager = SoundManager.getInstance();
-		sound = Assets.getSound ("main");	
-		soundManager.addSound("main", sound);
-		sound2 = Assets.getSound ("tic");	
-		soundManager.addSound("tic", sound2);
 		
 		addChild(fondo1);
 		addChild(fondo2);
@@ -84,6 +73,8 @@ class GameScene extends Scene {
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
        	       	
+		score++;
+		trace(score);
 		enemyTimer -= time;
 
 		if (enemyTimer < 0) {
@@ -111,5 +102,6 @@ class GameScene extends Scene {
 		}
 		return false;
     }
+	
 		
 }
