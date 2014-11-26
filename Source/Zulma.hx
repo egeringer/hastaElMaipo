@@ -24,11 +24,11 @@ class Zulma extends GameElement{
 		this.addChild(caminando);
 		this.x = 50;
 		this.y = escena.height - this.height - 40;
-		trace(escena.height);
+
 		hijos.push(caminando);
 		
 		shootTimer = 0;
-		cantVidas = 1;
+		setVidas(1);
 		salto = 13;
 		estado = 0; //Caminando
 		
@@ -40,10 +40,6 @@ class Zulma extends GameElement{
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
 		
-		
-		//Me mori, me voy a escena de muerte
-		if (cantVidas < 1) HastaElMaipo.getInstance().setScene('die');
-
 		if(InputManager.getInstance().keyPressed('W')){
 			if (estado != 1) {
 				estado = 1;
@@ -99,13 +95,17 @@ class Zulma extends GameElement{
        	// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
-				cantVidas--;
-				SoundManager.getInstance().playSound("tic");
+				if (cantVidas > 0 ){
+					cantVidas--;
+					SoundManager.getInstance().playSound("tic");
+				}else {
+					escena.setEstado(3); /*Estado perdi*/
+				}
 			}       			
 		}
 			
 		if (tiempoEfecto > 0) {
-			trace(tiempoEfecto);
+			//trace(tiempoEfecto);
 			tiempoEfecto -= time;
 			jugabilidadNormal = false;
 			aplicarEfecto = false;
@@ -124,6 +124,17 @@ class Zulma extends GameElement{
 			}
 		}
 		
+	}
+	
+	public function isAlive():Bool {
+		trace("estare viva?" + cantVidas);
+		if (cantVidas > 0)
+			return true;
+		return false;
+	}
+	
+	public function setVidas(vidas:Int) {
+		cantVidas = vidas;
 	}
 
 }

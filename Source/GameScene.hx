@@ -19,8 +19,8 @@ class GameScene extends Scene {
 	
 	private var enemyTimer:Float;
 	private var backBtn:Boton;
-	private var score = 0;
-
+	private static var puntaje:Int=0;
+	private var estadoDelJuego:Int = 0;
 	//Agregado Cristian
 	public var powerUps(default, null):Array<PowerUp>;
 	public var powersActivos(default, null):Array<PowerUp>;
@@ -29,8 +29,16 @@ class GameScene extends Scene {
 
 	public function new () {
 		super();
+		
+		initScene();
+		
+	}
 
-		backBtn=new Boton(0xFFFFFF,20,20,"images/pausa.png",function(_){HastaElMaipo.getInstance().setScene('menu');});
+	private function initScene() {
+		
+		setEstado(1); /*Jugando*/
+
+		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
 
 		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
@@ -71,12 +79,17 @@ class GameScene extends Scene {
 
 		addChild(backBtn);
 	}
-
+	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
+		
+		if (estadoDelJuego == 3 ) {
+			HastaElMaipo.getInstance().setScene('die');
+		}
        	       	
-		score++;
-		trace(score);
+		puntaje++;
+		Persistence.setScore(puntaje);
+		
 		enemyTimer -= time;
 
 		if (enemyTimer < 0) {
@@ -105,5 +118,17 @@ class GameScene extends Scene {
 		return false;
     }
 	
+	
+	public function resetGame() {
+		initScene();
+	}
+	
+	public function setEstado(estado:Int) {
+		estadoDelJuego = estado;
+	}
+
+	override public function show() {
+		if(estadoDelJuego == 3) resetGame();
+	}
 		
 }

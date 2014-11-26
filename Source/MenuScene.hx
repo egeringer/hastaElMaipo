@@ -6,10 +6,9 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import flash.media.Sound;
 import engine.*;
-/**
- * ...
- * @author fbricker
- */
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+
 class MenuScene extends Scene {
 
 	var jugar:Boton;
