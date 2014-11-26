@@ -6,36 +6,44 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import flash.media.Sound;
 import engine.*;
-/**
- * ...
- * @author fbricker
- */
+import openfl.text.TextField;
+import openfl.text.TextFormat;
+
 class DieScene extends Scene {
 
 	var jugar:Boton;
 	var ayuda:Boton;
-	var title:Bitmap;
+	var puntaje:TextField;
+
 
 	public function new(){
 		super();
 		
-		title = new Bitmap(Assets.getBitmapData("images/perdiste.png"));
 			
 		jugar=new Boton(0xFF0000,300,100,"images/jugar.png",play);
 		ayuda=new Boton(0x00FF00,300,100,"images/ayuda.png",help);
 		
-		this.addChild(title);
 		this.addChild(jugar);
 		this.addChild(ayuda);
 
-		title.x = 0;
-		title.y = 0;
 		
 		jugar.x=0;
 		jugar.y=200;
 
 		ayuda.x=400;
-		ayuda.y=200;
+		ayuda.y = 200;
+		
+				
+		puntaje = new TextField();
+		puntaje.selectable=false;
+		puntaje.width=300;
+		puntaje.height=100;
+		var tf=new TextFormat('fonts/showtime.ttf',30,0xFFFFFF);
+		puntaje.setTextFormat(tf);
+		puntaje.defaultTextFormat=tf;
+
+		this.addChild(puntaje);
+		
 	}
 
 	public function play(_){
@@ -47,6 +55,7 @@ class DieScene extends Scene {
 	}
 
 	override public function show() {
+		puntaje.text='MAX SCORE: '+Persistence.getScore();
 		/*
 		jugar.scaleX=jugar.scaleY=20;
 		jugar.alpha=0;
