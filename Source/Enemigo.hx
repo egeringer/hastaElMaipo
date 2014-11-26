@@ -14,7 +14,7 @@ class Enemigo extends GameElement{
 	var volando:Animation;
 	var escena:GameScene;
 	var numero:Int;
-	public var velocidad:Float;
+	var velocidad:Float;
 	
 	public function new (scene:GameScene, speed:Float) {
 		super();
@@ -51,4 +51,12 @@ class Enemigo extends GameElement{
 			morir();
 	}
 
+	public function incrementarVelocidad(nuevaVel:Float) {
+		velocidad *= nuevaVel;
+	}
+	
+	public function decrementarVelocidad(nuevaVel:Float) {
+		velocidad /= nuevaVel;
+	}
+	
 }

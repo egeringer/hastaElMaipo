@@ -7,15 +7,12 @@ import openfl.display.Bitmap;
  * ...
  * @author ...
  */
-class PUVelocidad extends PowerUp {
+class PUDefensa extends PowerUp {
 
-	private var factorIncremento:Float;
-	
 	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
 		super(scene, namePower, speed, efectoPU);
 		bitmapPower = new Bitmap(Assets.getBitmapData(namePower));
 		this.addChild(bitmapPower);
-		factorIncremento = 5;
 		tiempoEfecto = efectoPU;
 	}
 	
@@ -26,11 +23,11 @@ class PUVelocidad extends PowerUp {
 	}
 	
 	override public function aplicarEfecto() {
-		escena.incrementarVelocidad(factorIncremento);
+		escena.personajeInmune();
 	}
 
 	override public function quitarEfecto() {
-		escena.decrementarVelocidad(factorIncremento);
+		escena.personajeInmune();
 	}
 	
 }
