@@ -7,7 +7,6 @@ import engine.*;
 class Zulma extends GameElement{
 	
 	var caminando:Animation;
-	private var inmunidad:Float;
 	var escena:GameScene;
 	var shootTimer:Float;
 	var salto:Float;
@@ -28,7 +27,6 @@ class Zulma extends GameElement{
 		trace(escena.height);
 		hijos.push(caminando);
 		
-		inmunidad = 0;
 		shootTimer = 0;
 		cantVidas = 1;
 		salto = 13;
@@ -98,12 +96,13 @@ class Zulma extends GameElement{
 		}
 		*/
 		
-       	// Colision contra asteroide e inmunidad post-colision
-       		for (enemigo in escena.enemigosActivos) {
-		       	if (GameScene.detectarColision(this,enemigo)) {
-		       		SoundManager.getInstance().playSound("tic");
-		       	}       			
-       		}
+       	// Colision contra enemigos
+		for (enemigo in escena.enemigosActivos) {
+			if (GameScene.detectarColision(this, enemigo)) {
+				cantVidas--;
+				SoundManager.getInstance().playSound("tic");
+			}       			
+		}
 			
 		if (tiempoEfecto > 0) {
 			trace(tiempoEfecto);
