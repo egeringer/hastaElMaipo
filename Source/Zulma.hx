@@ -7,35 +7,50 @@ import engine.*;
 class Zulma extends GameElement{
 	
 	var caminando:Animation;
+	
+	//Animaciones PowerUps
+	var inmune:Animation;
+	var corriendo:Animation;
+	
 	var escena:GameScene;
 	var shootTimer:Float;
 	var salto:Float;
 	var cantVidas:Int;
-	
-	var tiempoEfecto:Float;
-	var aplicarEfecto:Bool;
-	var jugabilidadNormal:Bool;
+	var esInmune:Bool;
 	
 	public function new (scene:GameScene) {
 		super();
-
 		escena = scene;
-		caminando = new Animation( Assets.getBitmapData ("images/zulma_corriendo_small.png"), 16, 1);
+		
+		caminando = new Animation(Assets.getBitmapData("images/zulma_corriendo_small.png"), 16, 1);	
+		corriendo = new Animation(Assets.getBitmapData("images/zulma_corre.png"), 16, 1);
+		inmune = new Animation(Assets.getBitmapData("images/zulma_defensa.png"), 16, 1);
+		
+		caminando.alpha = 1;
+		corriendo.alpha = 0;
+		inmune.alpha = 0;
+		
+		this.addChild(corriendo);
+		this.addChild(inmune);
 		this.addChild(caminando);
+		
 		this.x = 50;
 		this.y = escena.height - this.height - 40;
-		trace(escena.height);
+		
 		hijos.push(caminando);
+		hijos.push(corriendo);
+		hijos.push(inmune);
 		
 		shootTimer = 0;
 		cantVidas = 1;
 		salto = 13;
 		estado = 0; //Caminando
-		
-		tiempoEfecto = 0;
-		aplicarEfecto = false;
-		jugabilidadNormal = true;
+		esInmune = false;
 	}	
+	
+	public function setInmunidad() {
+		esInmune = !esInmune;
+	}
 	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
@@ -48,8 +63,6 @@ class Zulma extends GameElement{
 			if (estado != 1) {
 				estado = 1;
 			}
-		}else {
-			
 		}
 		
 		if (estado == 1) {
@@ -96,34 +109,34 @@ class Zulma extends GameElement{
 		}
 		*/
 		
-       	// Colision contra enemigos
-		for (enemigo in escena.enemigosActivos) {
-			if (GameScene.detectarColision(this, enemigo)) {
-				cantVidas--;
-				SoundManager.getInstance().playSound("tic");
-			}       			
-		}
-			
-		if (tiempoEfecto > 0) {
-			trace(tiempoEfecto);
-			tiempoEfecto -= time;
-			jugabilidadNormal = false;
-			aplicarEfecto = false;
+       	if (esInmune) {
+			this.caminando.alpha = 0;
+			this.inmune.alpha = 1;
 		} else {
-			for (power in escena.powersActivos) {
-				if (GameScene.detectarColision(this, power)) {
-					power.consumir();
-					power.aplicarEfecto();
-					tiempoEfecto = 3;
-					aplicarEfecto = true;
-				}
-				if ((!jugabilidadNormal) && (!aplicarEfecto)){
-					power.quitarEfecto();
-					jugabilidadNormal = true;
-				}
-			}
+			this.caminando.alpha = 1;
+			this.inmune.alpha = 0;	
 		}
 		
+		// Colision contra enemigos
+		for (enemigo in escena.enemigosActivos) {
+			if (GameScene.detectarColision(this, enemigo)) {
+				if (esInmune) {
+					enemigo.morir();
+					trace("Se murio el bicho");
+				} else {
+					//cantVidas--;
+					trace("Me mori");
+					enemigo.morir();
+					SoundManager.getInstance().playSound("tic");
+				}
+			}       			
+		}
+		
+		for (power in escena.powersActivos) {
+			if (GameScene.detectarColision(this, power)) {
+				power.consumir();
+			}
+		}
 	}
 
 }

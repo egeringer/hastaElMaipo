@@ -50,8 +50,8 @@ class GameScene extends Scene {
 		//Agregado Cristian
 		powerUps = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PowerUp(this, "images/power_defense.png", 200)); //FALTA DEFENSA
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200));
+			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 3));
+			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 3));
 		}
 		powersActivos = new Array<PowerUp>();
 		powerTimer = 0;
@@ -66,21 +66,45 @@ class GameScene extends Scene {
 		// Los coloco en Pantalla
 		this.addChild(zulma);
 		hijos.push(zulma);
-
 		enemyTimer=0;
-
 		addChild(backBtn);
 	}
 
+	public function incrementarVelocidad(speed:Float) {
+		fondo1.incrementarVelocidad(speed);
+		fondo2.incrementarVelocidad(speed);
+		fondo3.incrementarVelocidad(speed);
+		fondo4.incrementarVelocidad(speed);
+		for (enemigo in enemigos)
+			enemigo.incrementarVelocidad(speed);
+		for (enemigo in enemigosActivos)
+			enemigo.incrementarVelocidad(speed);
+	}
+	
+	public function decrementarVelocidad(speed:Float) {
+		fondo1.decrementarVelocidad(speed);
+		fondo2.decrementarVelocidad(speed);
+		fondo3.decrementarVelocidad(speed);
+		fondo4.decrementarVelocidad(speed);
+		for (enemigo in enemigos)
+			enemigo.decrementarVelocidad(speed);
+		for (enemigo in enemigosActivos)
+			enemigo.decrementarVelocidad(speed);
+	}
+	
+	public function personajeInmune() {
+		zulma.setInmunidad();
+	}
+	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
        	       	
 		score++;
-		trace(score);
+		//trace(score);
 		enemyTimer -= time;
 
 		if (enemyTimer < 0) {
-			enemyTimer = Std.random(3)+2;
+			enemyTimer = Std.random(3) + 2;
 			if (enemigos.length > 0) 
 				enemigos.pop().atacar();
 		}
@@ -88,7 +112,7 @@ class GameScene extends Scene {
 		//Agregado Cristian
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(10) + 5;
+			powerTimer = Std.random(5) + 2;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}

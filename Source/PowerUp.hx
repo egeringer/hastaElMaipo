@@ -9,13 +9,15 @@ class PowerUp extends GameElement {
 	var bitmapPower:Bitmap;
 	var velocidad:Float;
 	
-	public function new(scene:GameScene, namePower:String, speed:Float) {
+	var tiempoEfecto:Int;
+	
+	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
 		super();
 		escena = scene;
 		velocidad = speed;
 	}
 	
-	public function consumir() {
+	public function desaparecer() {
 		escena.powerUps.push(this);
 		escena.hijos.remove(this);
 		escena.removeChild(this);
@@ -34,10 +36,11 @@ class PowerUp extends GameElement {
 		super.updateLogic(time);
 		this.x -= time * velocidad;
 		if (this.x < -100)
-			consumir();
+			desaparecer();
 	}
 	
 	public function aplicarEfecto() {}
 	public function quitarEfecto() {}
+	public function consumir() {}
 	
 }

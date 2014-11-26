@@ -5,7 +5,7 @@ import openfl.Assets;
 
 class FondoAnimado extends GameElement {
 
-	public var vel:Float;
+	var vel:Float;
 	public var bitmap1:Bitmap;
 	public var bitmap2:Bitmap;
 	public var bitmap3:Bitmap;
@@ -27,6 +27,14 @@ class FondoAnimado extends GameElement {
 		vel = velocidad;
 		
 		bitmap1.y = bitmap2.y = bitmap3.y = 0;
+	}
+
+	public function incrementarVelocidad(nuevaVel:Float) {
+		vel *= nuevaVel;
+	}
+	
+	public function decrementarVelocidad(nuevaVel:Float) {
+		vel /= nuevaVel;
 	}
 
 	override function updateLogic(time:Float){
