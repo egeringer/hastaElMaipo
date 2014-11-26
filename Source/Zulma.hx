@@ -117,7 +117,7 @@ class Zulma extends GameElement{
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
 				if (cantVidas > 0 ){
-					cantVidas--;
+					if (!esInmune) cantVidas--;
 					SoundManager.getInstance().playSound("tic");
 				}else {
 					escena.setEstado(3); /*Estado perdi*/
