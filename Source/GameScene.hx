@@ -11,10 +11,12 @@ class GameScene extends Scene {
 	private var zulma:Zulma;
 	public var enemigos(default,null):Array<Enemigo>;
 	public var enemigosActivos(default,null):Array<Enemigo>;
-	private var fondo1:FondoAnimado;
-	private var fondo2:FondoAnimado;
-	private var fondo3:FondoAnimado;
-	private var fondo4:FondoAnimado;
+	
+	public var fondo1:FondoAnimado;
+	public var fondo2:FondoAnimado;
+	public var fondo3:FondoAnimado;
+	public var fondo4:FondoAnimado;
+	
 	private var enemyTimer:Float;
 	private var backBtn:Boton;
 	private var score = 0;
@@ -48,8 +50,8 @@ class GameScene extends Scene {
 		//Agregado Cristian
 		powerUps = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PowerUp(this, "images/power_defense.png", 200));
-			powerUps.push(new PowerUp(this, "images/power_velocity.png", 200));
+			powerUps.push(new PowerUp(this, "images/power_defense.png", 200)); //FALTA DEFENSA
+			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200));
 		}
 		powersActivos = new Array<PowerUp>();
 		powerTimer = 0;
@@ -86,7 +88,7 @@ class GameScene extends Scene {
 		//Agregado Cristian
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(5) + 5;
+			powerTimer = Std.random(10) + 5;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}

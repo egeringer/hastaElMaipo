@@ -13,6 +13,10 @@ class Zulma extends GameElement{
 	var salto:Float;
 	var cantVidas:Int;
 	
+	var tiempoEfecto:Float;
+	var aplicarEfecto:Bool;
+	var jugabilidadNormal:Bool;
+	
 	public function new (scene:GameScene) {
 		super();
 
@@ -29,6 +33,10 @@ class Zulma extends GameElement{
 		cantVidas = 1;
 		salto = 13;
 		estado = 0; //Caminando
+		
+		tiempoEfecto = 0;
+		aplicarEfecto = false;
+		jugabilidadNormal = true;
 	}	
 	
 	override public function updateLogic(time:Float){
@@ -90,18 +98,37 @@ class Zulma extends GameElement{
 		}
 		*/
 		
-       	// Colision contra enemigos
-		for (enemigo in escena.enemigosActivos) {
-			if (GameScene.detectarColision(this, enemigo)) {
-				SoundManager.getInstance().playSound("tic");
-				cantVidas--;
-			}       			
-		}
-			
-		for (power in escena.powersActivos) {
-			if (GameScene.detectarColision(this, power)) {
-				power.consumir(); //Desaparece power al haber colision (Y)
-
+       	// Colision contra asteroide e inmunidad post-colision
+       	if (inmunidad > 0) {
+       		inmunidad -= time;
+       		this.alpha = 0.1;
+       	} else {
+       		this.alpha = 1;
+       		for (enemigo in escena.enemigosActivos) {
+		       	if (GameScene.detectarColision(this,enemigo)) {
+		       		inmunidad = 6;
+					//trace("Choco enemigo");
+		       		//sound.play();
+		       	}       			
+       		}
+       	}
+		if (tiempoEfecto > 0) {
+			trace(tiempoEfecto);
+			tiempoEfecto -= time;
+			jugabilidadNormal = false;
+			aplicarEfecto = false;
+		} else {
+			for (power in escena.powersActivos) {
+				if (GameScene.detectarColision(this, power)) {
+					power.consumir();
+					power.aplicarEfecto();
+					tiempoEfecto = 3;
+					aplicarEfecto = true;
+				}
+				if ((!jugabilidadNormal) && (!aplicarEfecto)){
+					power.quitarEfecto();
+					jugabilidadNormal = true;
+				}
 			}
 		}
 		

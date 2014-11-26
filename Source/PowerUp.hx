@@ -13,8 +13,6 @@ class PowerUp extends GameElement {
 		super();
 		escena = scene;
 		velocidad = speed;
-		bitmapPower = new Bitmap(Assets.getBitmapData(namePower));
-		this.addChild(bitmapPower);
 	}
 	
 	public function consumir() {
@@ -38,5 +36,8 @@ class PowerUp extends GameElement {
 		if (this.x < -100)
 			consumir();
 	}
+	
+	public function aplicarEfecto() {}
+	public function quitarEfecto() {}
 	
 }
