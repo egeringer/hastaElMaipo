@@ -12,6 +12,10 @@ class Zulma extends GameElement{
 	var shootTimer:Float;
 	var salto:Float;
 	
+	var tiempoEfecto:Float;
+	var aplicarEfecto:Bool;
+	var jugabilidadNormal:Bool;
+	
 	public function new (scene:GameScene) {
 		super();
 
@@ -27,6 +31,10 @@ class Zulma extends GameElement{
 		shootTimer = 0;
 		salto = 13;
 		estado = 0; //Caminando
+		
+		tiempoEfecto = 0;
+		aplicarEfecto = false;
+		jugabilidadNormal = true;
 	}	
 	
 	override public function updateLogic(time:Float){
@@ -98,10 +106,23 @@ class Zulma extends GameElement{
 		       	}       			
        		}
        	}
-		for (power in escena.powersActivos) {
-			if (GameScene.detectarColision(this, power)) {
-				power.consumir(); //Desaparece power al haber colision (Y)
-
+		if (tiempoEfecto > 0) {
+			trace(tiempoEfecto);
+			tiempoEfecto -= time;
+			jugabilidadNormal = false;
+			aplicarEfecto = false;
+		} else {
+			for (power in escena.powersActivos) {
+				if (GameScene.detectarColision(this, power)) {
+					power.consumir();
+					power.aplicarEfecto();
+					tiempoEfecto = 3;
+					aplicarEfecto = true;
+				}
+				if ((!jugabilidadNormal) && (!aplicarEfecto)){
+					power.quitarEfecto();
+					jugabilidadNormal = true;
+				}
 			}
 		}
 		

@@ -14,7 +14,7 @@ class Enemigo extends GameElement{
 	var volando:Animation;
 	var escena:GameScene;
 	var numero:Int;
-	var velocidad:Float;
+	public var velocidad:Float;
 	
 	public function new (scene:GameScene, speed:Float) {
 		super();
