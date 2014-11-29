@@ -46,7 +46,7 @@ class Zulma extends GameElement{
 		salto = 15;
 		estado = 0; //Caminando
 		esInmune = false;
-	}	
+	}
 	
 	public function setInmunidad() {
 		esInmune = !esInmune;
