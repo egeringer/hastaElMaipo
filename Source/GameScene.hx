@@ -15,6 +15,7 @@ class GameScene extends Scene {
 	public var fondo1:FondoAnimado;
 	public var fondo2:FondoAnimado;
 	public var fondo3:FondoAnimado;
+	public var fondo3punto5:FondoAnimado;
 	public var fondo4:FondoAnimado;
 	
 	private var enemyTimer:Float;
@@ -41,16 +42,19 @@ class GameScene extends Scene {
 		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
 
 		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
+		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 30);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
 		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
 		
 		addChild(fondo1);
+		addChild(fondo3punto5);
 		addChild(fondo2);
 		addChild(fondo3);
 		addChild(fondo4);
 
 		hijos.push(fondo1);
+		hijos.push(fondo3punto5);
 		hijos.push(fondo2);
 		hijos.push(fondo3);
 		hijos.push(fondo4);
