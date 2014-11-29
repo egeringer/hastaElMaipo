@@ -18,8 +18,8 @@ class PUDefensa extends PowerUp {
 	
 	override public function consumir() {
 		desaparecer();
-		aplicarEfecto();
-		Timer.delay(quitarEfecto, tiempoEfecto * 1000);
+		//aplicarEfecto();
+		//Timer.delay(quitarEfecto, tiempoEfecto * 1000);
 	}
 	
 	override public function aplicarEfecto() {

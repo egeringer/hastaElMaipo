@@ -25,8 +25,8 @@ class PowerUp extends GameElement {
 	}
 	
 	public function mostrar() {
-		this.x = 1000;
-		this.y = Std.random (Std.random(200)) + 200;
+		this.x = 1500;
+		this.y = escena.height-this.height-51 - Std.random (Std.random(200));//51 es la altura del piso
 		escena.hijos.push(this);
 		escena.addChild(this);
 		escena.powersActivos.push(this);

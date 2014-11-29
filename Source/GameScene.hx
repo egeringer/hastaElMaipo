@@ -72,7 +72,7 @@ class GameScene extends Scene {
 		enemigos = new Array<Enemigo>();
 		enemigosActivos = new Array<Enemigo>();
 		//Cargo los enemigos
-		for (i in 0 ... 10) enemigos.push(new Enemigo(this, 200));
+		for (i in 0 ... 10) enemigos.push(new Enemigo(this, 300));
 		zulma = new Zulma(this);
 		
 		// Los coloco en Pantalla

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="HastaElMaipo" package="com.sample.project" version="1.0.0" company="Company Name" />
+	<meta title="HastaElMaipo" package="com.sample.hastaElMaipo" version="1.0.0" company="Company Name" />
 	<app main="HastaElMaipo" path="Export" file="HastaElMaipo" />
 	
 	<source path="Source" />

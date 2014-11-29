@@ -35,7 +35,7 @@ class Zulma extends GameElement{
 		this.addChild(caminando);
 		
 		this.x = 50;
-		this.y = escena.height - this.height - 40;
+		this.y = escena.height - this.height - 51; //51 es la altura del piso.
 
 		hijos.push(caminando);
 		hijos.push(corriendo);
@@ -43,7 +43,7 @@ class Zulma extends GameElement{
 		
 		shootTimer = 0;
 		setVidas(1);
-		salto = 13;
+		salto = 15;
 		estado = 0; //Caminando
 		esInmune = false;
 	}	
@@ -64,10 +64,10 @@ class Zulma extends GameElement{
 		if (estado == 1) {
 			this.y -= salto*0.5;
 			salto-=0.5;
-			if (salto == -13) {
+			if (salto == -15) {
 				estado = 0;
-				salto = 13;
-				this.y += 13*0.5;
+				salto = 15;
+				this.y += 15*0.5;
 			}
 		}
 		
