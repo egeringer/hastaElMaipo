@@ -119,12 +119,13 @@ class Zulma extends GameElement{
 				if (cantVidas > 0 ){
 					if (!esInmune) cantVidas--;
 					SoundManager.getInstance().playSound("tic");
-				}else {
+				} else {
 					escena.setEstado(3); /*Estado perdi*/
 				}
 			}       			
 		}
 		
+		// Colision contra power-ups
 		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {
 				power.consumir();

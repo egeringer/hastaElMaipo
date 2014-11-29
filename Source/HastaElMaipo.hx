@@ -27,7 +27,7 @@ class HastaElMaipo extends engine.SceneManager {
 
 		
 		//Seteo las escenas
-		sceneMap.set('game',new GameScene());
+		sceneMap.set('game',new RunnerScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
 		

@@ -5,13 +5,13 @@ import openfl.display.Bitmap;
 
 class PowerUp extends GameElement {
 	
-	var escena:GameScene;
+	var escena:RunnerScene;
 	var bitmapPower:Bitmap;
 	var velocidad:Float;
 	
 	var tiempoEfecto:Int;
 	
-	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
+	public function new(scene:RunnerScene, namePower:String, speed:Float, efectoPU:Int) {
 		super();
 		escena = scene;
 		velocidad = speed;

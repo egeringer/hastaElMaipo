@@ -4,105 +4,63 @@ import flash.display.Sprite;
 import flash.Lib;
 import flash.display.Bitmap;
 import openfl.Assets;
-
 import engine.*;
+
 class GameScene extends Scene {
 
 	private var zulma:Zulma;
+	
 	public var enemigos(default,null):Array<Enemigo>;
-	public var enemigosActivos(default,null):Array<Enemigo>;
+	public var enemigosActivos(default, null):Array<Enemigo>;
 	
-	public var fondo1:FondoAnimado;
-	public var fondo2:FondoAnimado;
-	public var fondo3:FondoAnimado;
-	public var fondo3punto5:FondoAnimado;
-	public var fondo4:FondoAnimado;
-	
-	private var enemyTimer:Float;
-	private var backBtn:Boton;
-	private static var puntaje:Int=0;
-	private var estadoDelJuego:Int = 0;
-	//Agregado Cristian
 	public var powerUps(default, null):Array<PowerUp>;
 	public var powersActivos(default, null):Array<PowerUp>;
-	var powerTimer:Float;
-	//FIN Agregado Cristian
+	
+	private var backBtn:Boton;
+	
+	private var fondo1:FondoAnimado;
+	private var fondo2:FondoAnimado;
+	private var fondo3:FondoAnimado;
+	private var fondo3punto5:FondoAnimado;
+	private var fondo4:FondoAnimado;
+	
+	//private var enemyTimer:Float;
+	//private var powerTimer:Float;
+	private static var puntaje:Int = 0;
+	private var estadoDelJuego:Int = 0;
+	
+	private var timeToBoss:Int = 0;
+	private var nextBoss:Int = 200;
 
 	public function new () {
 		super();
-		
 		initScene();
-		
 	}
 
-	private function initScene() {
-		
-		setEstado(1); /*Jugando*/
+	private function initScene() {}
 
-		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
-
-		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
-		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 30);
-		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
-		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
-		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
-		
-		addChild(fondo1);
-		addChild(fondo3punto5);
-		addChild(fondo2);
-		addChild(fondo3);
-		addChild(fondo4);
-
-		hijos.push(fondo1);
-		hijos.push(fondo3punto5);
-		hijos.push(fondo2);
-		hijos.push(fondo3);
-		hijos.push(fondo4);
-		
-		//Agregado Cristian
-		powerUps = new Array<PowerUp>();
-		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 3));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 3));
-		}
-		powersActivos = new Array<PowerUp>();
-		powerTimer = 0;
-		//FIN Agregado Cristian
-
-		enemigos = new Array<Enemigo>();
-		enemigosActivos = new Array<Enemigo>();
-		//Cargo los enemigos
-		for (i in 0 ... 10) enemigos.push(new Enemigo(this, 300));
-		zulma = new Zulma(this);
-		
-		// Los coloco en Pantalla
-		this.addChild(zulma);
-		hijos.push(zulma);
-		enemyTimer=0;
-		addChild(backBtn);
-	}
-
-	public function incrementarVelocidad(speed:Float) {
-		fondo1.incrementarVelocidad(speed);
-		fondo2.incrementarVelocidad(speed);
-		fondo3.incrementarVelocidad(speed);
-		fondo4.incrementarVelocidad(speed);
-		for (enemigo in enemigos)
-			enemigo.incrementarVelocidad(speed);
-		for (enemigo in enemigosActivos)
-			enemigo.incrementarVelocidad(speed);
-	}
-	
-	public function decrementarVelocidad(speed:Float) {
-		fondo1.decrementarVelocidad(speed);
-		fondo2.decrementarVelocidad(speed);
-		fondo3.decrementarVelocidad(speed);
-		fondo4.decrementarVelocidad(speed);
-		for (enemigo in enemigos)
-			enemigo.decrementarVelocidad(speed);
-		for (enemigo in enemigosActivos)
-			enemigo.decrementarVelocidad(speed);
-	}
+					//MOVIDO A CLASE RUNNERSCENE
+	//public function incrementarVelocidad(speed:Float) {
+		//fondo1.incrementarVelocidad(speed);
+		//fondo2.incrementarVelocidad(speed);
+		//fondo3.incrementarVelocidad(speed);
+		//fondo4.incrementarVelocidad(speed);
+		//for (enemigo in enemigos)
+			//enemigo.incrementarVelocidad(speed);
+		//for (enemigo in enemigosActivos)
+			//enemigo.incrementarVelocidad(speed);
+	//}
+	//
+	//public function decrementarVelocidad(speed:Float) {
+		//fondo1.decrementarVelocidad(speed);
+		//fondo2.decrementarVelocidad(speed);
+		//fondo3.decrementarVelocidad(speed);
+		//fondo4.decrementarVelocidad(speed);
+		//for (enemigo in enemigos)
+			//enemigo.decrementarVelocidad(speed);
+		//for (enemigo in enemigosActivos)
+			//enemigo.decrementarVelocidad(speed);
+	//}
 	
 	public function personajeInmune() {
 		zulma.setInmunidad();
@@ -114,24 +72,33 @@ class GameScene extends Scene {
 		if (estadoDelJuego == 3 ) {
 			HastaElMaipo.getInstance().setScene('die');
 		}
-       	       	
+
 		puntaje++;
 		Persistence.setScore(puntaje);
-		enemyTimer -= time;
-
-		if (enemyTimer < 0) {
-			enemyTimer = Std.random(3) + 2;
-			if (enemigos.length > 0) 
-				enemigos.pop().atacar();
+		
+		timeToBoss++;
+		trace(timeToBoss);
+		if (timeToBoss == nextBoss) {
+			timeToBoss = 0;
+			nextBoss += nextBoss;
+			HastaElMaipo.getInstance().setScene('boss');
+			trace("boss");
 		}
 		
-		//Agregado Cristian
-		powerTimer -= time;
-		if (powerTimer < 0) {
-			powerTimer = Std.random(5) + 2;
-			if (powerUps.length > 0)
-				powerUps.pop().mostrar();
-		}
+						//MOVIDO A CLASE RUNNERSCENE
+		//enemyTimer -= time;
+		//if (enemyTimer < 0) {
+			//enemyTimer = Std.random(3) + 2;
+			//if (enemigos.length > 0) 
+				//enemigos.pop().atacar();
+		//}
+		//
+		//powerTimer -= time;
+		//if (powerTimer < 0) {
+			//powerTimer = Std.random(5) + 2;
+			//if (powerUps.length > 0)
+				//powerUps.pop().mostrar();
+		//}
        	
 	}
 
@@ -145,7 +112,6 @@ class GameScene extends Scene {
 		return false;
     }
 	
-	
 	public function resetGame() {
 		initScene();
 	}
@@ -157,5 +123,5 @@ class GameScene extends Scene {
 	override public function show() {
 		if(estadoDelJuego == 3) resetGame();
 	}
-		
+
 }

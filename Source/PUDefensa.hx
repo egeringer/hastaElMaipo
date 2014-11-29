@@ -9,7 +9,7 @@ import openfl.display.Bitmap;
  */
 class PUDefensa extends PowerUp {
 
-	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
+	public function new(scene:RunnerScene, namePower:String, speed:Float, efectoPU:Int) {
 		super(scene, namePower, speed, efectoPU);
 		bitmapPower = new Bitmap(Assets.getBitmapData(namePower));
 		this.addChild(bitmapPower);

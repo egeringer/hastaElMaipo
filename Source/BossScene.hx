@@ -5,20 +5,17 @@ import engine.*;
  * ...
  * @author ...
  */
-class BossScene extends Scene {
+class BossScene extends GameScene {
 	
-	private var backBtn:Boton;
-	public var fondo1:FondoAnimado;
-	public var fondo2:FondoAnimado;
-	public var fondo3:FondoAnimado;
-	public var fondo3punto5:FondoAnimado;
-	public var fondo4:FondoAnimado;
-	
-	private var zulma:Zulma;
-
 	public function new() {
 		super();
-		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) {HastaElMaipo.getInstance().setScene('menu'); } );
+	}
+	
+	override function initScene() {
+		
+		setEstado(1); /*Jugando*/
+		
+		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
 		
 		fondo1 = new FondoAnimado('images/bkg-4.png', 0);
 		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 0);
@@ -38,13 +35,18 @@ class BossScene extends Scene {
 		hijos.push(fondo3);
 		hijos.push(fondo4);
 		
+		powerUps = new Array<PowerUp>();
+		powersActivos = new Array<PowerUp>();
+		enemigos = new Array<Enemigo>();
+		enemigosActivos = new Array<Enemigo>();
+		
 		zulma = new Zulma(this);
 		addChild(zulma);
 		hijos.push(zulma);
+		addChild(backBtn);
 	}
 	
 	override public function updateLogic(time:Float) {
-		super.updateLogic(time);
+		zulma.updateLogic(time);
 	}
-	
 }
