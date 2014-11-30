@@ -17,7 +17,7 @@ class RunnerScene extends GameScene {
 	override function initScene() {
 		
 		setEstado(1); /*Jugando*/
-
+		
 		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
 
 		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
@@ -57,8 +57,10 @@ class RunnerScene extends GameScene {
 		hijos.push(zulma);
 		addChild(backBtn);
 		
-		timeToBoss = 0;
-		nextBoss = 200;
+		GatoBala.init(this);
+		
+		//timeToBoss = 0;
+		//nextBoss = 200;
 	}
 	
 	public function incrementarVelocidad(speed:Float) {

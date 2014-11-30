@@ -29,8 +29,8 @@ class GameScene extends Scene {
 	private static var puntaje:Int = 0;
 	private var estadoDelJuego:Int = 0;
 	
-	private var timeToBoss:Int = 0;
-	private var nextBoss:Int = 200;
+	//private var timeToBoss:Int = 0;
+	//private var nextBoss:Int = 200;
 
 	public function new () {
 		super();
@@ -76,14 +76,14 @@ class GameScene extends Scene {
 		puntaje++;
 		Persistence.setScore(puntaje);
 		
-		timeToBoss++;
-		trace(timeToBoss);
-		if (timeToBoss == nextBoss) {
-			timeToBoss = 0;
-			nextBoss += nextBoss;
-			HastaElMaipo.getInstance().setScene('boss');
-			trace("boss");
-		}
+		//timeToBoss++;
+		//trace(timeToBoss);
+		//if (timeToBoss == nextBoss) {
+			//timeToBoss = 0;
+			//nextBoss += nextBoss;
+			//HastaElMaipo.getInstance().setScene('boss');
+			//trace("boss");
+		//}
 		
 						//MOVIDO A CLASE RUNNERSCENE
 		//enemyTimer -= time;

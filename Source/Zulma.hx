@@ -131,6 +131,19 @@ class Zulma extends GameElement{
 				power.consumir();
 			}
 		}
+		
+		//Disparar gato.
+		if (InputManager.getInstance().keyPressed('E')) {
+			var gb = GatoBala.getGatoBala();
+			if (gb != null) {
+				trace ("salio");
+				gb.x = this.x;
+				gb.y = this.y;
+			} else {
+				trace ("no hay gato");
+			}
+		}
+		
 	}
 	
 	public function isAlive():Bool {
