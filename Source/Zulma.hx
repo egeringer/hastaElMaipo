@@ -116,7 +116,8 @@ class Zulma extends GameElement{
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
-				if (cantVidas > 0 ){
+				enemigo.morir();
+				if (cantVidas > 1 ) {
 					if (!esInmune) cantVidas--;
 					SoundManager.getInstance().playSound("tic");
 				} else {
@@ -147,7 +148,6 @@ class Zulma extends GameElement{
 	}
 	
 	public function isAlive():Bool {
-		trace("estare viva?" + cantVidas);
 		if (cantVidas > 0)
 			return true;
 		return false;
@@ -155,6 +155,10 @@ class Zulma extends GameElement{
 	
 	public function setVidas(vidas:Int) {
 		cantVidas = vidas;
+	}
+	
+	public function incrementarVidas() {
+		cantVidas++;
 	}
 
 }

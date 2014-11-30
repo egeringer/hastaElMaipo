@@ -7,14 +7,16 @@ class PowerUp extends GameElement {
 	
 	var escena:RunnerScene;
 	var bitmapPower:Bitmap;
+	var powerActivo:Bool;
 	var velocidad:Float;
-	
 	var tiempoEfecto:Int;
+	
 	
 	public function new(scene:RunnerScene, namePower:String, speed:Float, efectoPU:Int) {
 		super();
 		escena = scene;
 		velocidad = speed;
+		powerActivo = false;
 	}
 	
 	public function desaparecer() {
