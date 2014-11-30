@@ -41,8 +41,9 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 3));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 3));
+			//powerUps.push(new PUDefensa(this, "images/power_defense.png", 280, 18));
+			//powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 280, 10));
+			powerUps.push(new PUVida(this, "images/power_life.png", 280, 1));
 		}
 		powerTimer = 0;
 
@@ -58,7 +59,7 @@ class RunnerScene extends GameScene {
 		addChild(backBtn);
 		
 		timeToBoss = 0;
-		nextBoss = 200;
+		nextBoss = 2000;
 	}
 	
 	public function incrementarVelocidad(speed:Float) {
@@ -94,7 +95,7 @@ class RunnerScene extends GameScene {
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(5) + 2;
+			powerTimer = Std.random(30) + 2;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}
