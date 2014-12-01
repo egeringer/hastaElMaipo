@@ -29,8 +29,8 @@ class GameScene extends Scene {
 	private static var puntaje:Int = 0;
 	private var estadoDelJuego:Int = 0;
 	
-	//private var timeToBoss:Int = 0;
-	//private var nextBoss:Int = 200;
+	private var timeToBoss:Int = 0;
+	private var nextBoss:Int = 200;
 
 	public function new () {
 		super();
@@ -88,7 +88,6 @@ class GameScene extends Scene {
 		
 		//timeToBoss++;
 		//trace(timeToBoss);
-		
 		//if (timeToBoss == nextBoss) {
 			//timeToBoss = 0;
 			//nextBoss += nextBoss;

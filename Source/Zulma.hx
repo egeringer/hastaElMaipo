@@ -62,12 +62,12 @@ class Zulma extends GameElement{
 		}
 		
 		if (estado == 1) {
-			this.y -= salto*0.5;
-			salto-=0.5;
+			this.y -= salto * 0.5;
+			salto -= 0.5;
 			if (salto == -15) {
 				estado = 0;
 				salto = 15;
-				this.y += 15*0.5;
+				this.y += 15 * 0.5;
 			}
 		}
 		
@@ -113,7 +113,7 @@ class Zulma extends GameElement{
 			this.inmune.alpha = 0;	
 		}
 		
-		trace(cantVidas + " en la zulma " + this);
+		//trace(cantVidas + " en la zulma " + this);
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
@@ -138,12 +138,13 @@ class Zulma extends GameElement{
 		if (InputManager.getInstance().keyPressed('E')) {
 			var gb = GatoBala.getGatoBala();
 			if (gb != null) {
-				trace ("salio");
+				//trace ("salio");
 				gb.x = this.x;
 				gb.y = this.y;
-			} else {
-				trace ("no hay gato");
-			}
+			} 
+			//else {
+				//trace ("no hay gato");
+			//}
 		}
 		
 	}

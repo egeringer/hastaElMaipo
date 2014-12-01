@@ -7,6 +7,8 @@ import engine.*;
  */
 class BossScene extends GameScene {
 	
+	var jefe:Boss;
+	
 	public function new() {
 		super();
 	}
@@ -44,9 +46,16 @@ class BossScene extends GameScene {
 		addChild(zulma);
 		hijos.push(zulma);
 		addChild(backBtn);
+		
+		jefe = new Boss(this);
+		addChild(jefe);
+		hijos.push(jefe);
+		
+		GatoBala.init(this);
+		BossBala.init(this);
 	}
 	
 	override public function updateLogic(time:Float) {
-		zulma.updateLogic(time);
+		super.updateLogic(time);
 	}
 }

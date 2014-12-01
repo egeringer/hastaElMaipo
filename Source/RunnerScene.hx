@@ -58,10 +58,10 @@ class RunnerScene extends GameScene {
 		hijos.push(zulma);
 		addChild(backBtn);
 		
-		GatoBala.init(this);
+		//GatoBala.init(this);
 		
-		//timeToBoss = 0;
-		//nextBoss = 200;
+		timeToBoss = 0;
+		nextBoss = 200;
 	}
 	
 	public function incrementarVelocidad(speed:Float) {
@@ -100,6 +100,15 @@ class RunnerScene extends GameScene {
 			powerTimer = Std.random(30) + 2;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
+		}
+		
+		timeToBoss++;
+		//trace(timeToBoss);
+		if (timeToBoss == nextBoss) {
+			timeToBoss = 0;
+			nextBoss += nextBoss;
+			HastaElMaipo.getInstance().setScene('boss');
+			//trace("boss");
 		}
 	}
 	

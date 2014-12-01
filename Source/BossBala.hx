@@ -5,16 +5,15 @@ import openfl.Assets;
  * ...
  * @author ...
  */
-class GatoBala extends GameElement {
+class BossBala extends GameElement {
 
 	var imagen:Animation;
-	static var pool:Array<GatoBala> = null;
+	static var pool:Array<BossBala> = null;
 	static private var escena:BossScene;
 	
 	public function new() {
 		super();
-		imagen = new Animation(Assets.getBitmapData("images/nyan_cat.png"), 1, 1);
-		imagen.scaleX = imagen.scaleY = 0.25;
+		imagen = new Animation(Assets.getBitmapData("images/power_life.png"), 1, 1);
 		this.addChild(imagen);
 		hijos.push(imagen);
 		visible = false;
@@ -22,31 +21,33 @@ class GatoBala extends GameElement {
 	
 	public static function init(scene:BossScene) {
 		if (pool == null) {
-			GatoBala.escena = scene;
-			pool = new Array<GatoBala>();
-			var gb = new GatoBala();
-			escena.hijos.push(gb);
-			escena.addChild(gb);
-			pool.push(gb);
+			BossBala.escena = scene;
+			pool = new Array<BossBala>();
+			for(i in 0 ... 7) {
+				var bb = new BossBala();
+				escena.hijos.push(bb);
+				escena.addChild(bb);
+				pool.push(bb);
+			}
 		}
 	}
 	
-	public static function getGatoBala():GatoBala {
+	public static function getBossBala():BossBala {
 		if (pool.length > 0) {
-			var gb = pool.pop();
-			gb.visible = true;
-			gb.imagen.visible = true;
-			return gb;
+			var bb = pool.pop();
+			bb.visible = true;
+			bb.imagen.visible = true;
+			return bb;
 		}
 		return null;
 	}
-	
+
 	override public function updateLogic(time:Float) {
 		if (!visible) 
 			return;
 		super.updateLogic(time);
 		
-		this.x += 200 * time;
+		this.x -= 200 * time;
 		//for (enemigo in escena.enemigosActivos) {
 			//if (GameScene.detectarColision(this, enemigo)) {
 				//imagen.visible = false;
@@ -55,7 +56,8 @@ class GatoBala extends GameElement {
 				//this.visible = false;
 			//}	
 		//}
-		if (this.x > 900) {
+		if (this.x < -100) {
+			//trace ("se guardo bala boss");
 			pool.push(this);
 			this.visible = false;
 			this.imagen.visible = false;
