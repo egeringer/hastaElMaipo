@@ -9,7 +9,7 @@ import openfl.display.Bitmap;
  */
 class PUDefensa extends PowerUp {
 
-	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
+	public function new(scene:RunnerScene, namePower:String, speed:Float, efectoPU:Int) {
 		super(scene, namePower, speed, efectoPU);
 		bitmapPower = new Bitmap(Assets.getBitmapData(namePower));
 		this.addChild(bitmapPower);
@@ -23,11 +23,13 @@ class PUDefensa extends PowerUp {
 	}
 	
 	override public function aplicarEfecto() {
+		powerActivo = true;
 		escena.personajeInmune();
 	}
 
 	override public function quitarEfecto() {
-		escena.personajeInmune();
+		if (powerActivo) escena.personajeInmune();
+		powerActivo = false;
 	}
 	
 }

@@ -5,16 +5,18 @@ import openfl.display.Bitmap;
 
 class PowerUp extends GameElement {
 	
-	var escena:GameScene;
+	var escena:RunnerScene;
 	var bitmapPower:Bitmap;
+	var powerActivo:Bool;
 	var velocidad:Float;
-	
 	var tiempoEfecto:Int;
 	
-	public function new(scene:GameScene, namePower:String, speed:Float, efectoPU:Int) {
+	
+	public function new(scene:RunnerScene, namePower:String, speed:Float, efectoPU:Int) {
 		super();
 		escena = scene;
 		velocidad = speed;
+		powerActivo = false;
 	}
 	
 	public function desaparecer() {
@@ -25,8 +27,8 @@ class PowerUp extends GameElement {
 	}
 	
 	public function mostrar() {
-		this.x = 1000;
-		this.y = Std.random (Std.random(200)) + 200;
+		this.x = 1500;
+		this.y = escena.height-this.height-51 - Std.random (Std.random(200));//51 es la altura del piso
 		escena.hijos.push(this);
 		escena.addChild(this);
 		escena.powersActivos.push(this);

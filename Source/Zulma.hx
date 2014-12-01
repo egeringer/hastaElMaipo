@@ -35,7 +35,7 @@ class Zulma extends GameElement{
 		this.addChild(caminando);
 		
 		this.x = 50;
-		this.y = escena.height - this.height - 40;
+		this.y = escena.height - this.height - 51; //51 es la altura del piso.
 
 		hijos.push(caminando);
 		hijos.push(corriendo);
@@ -43,10 +43,10 @@ class Zulma extends GameElement{
 		
 		shootTimer = 0;
 		setVidas(1);
-		salto = 13;
+		salto = 15;
 		estado = 0; //Caminando
 		esInmune = false;
-	}	
+	}
 	
 	public function setInmunidad() {
 		esInmune = !esInmune;
@@ -62,12 +62,12 @@ class Zulma extends GameElement{
 		}
 		
 		if (estado == 1) {
-			this.y -= salto*0.5;
-			salto-=0.5;
-			if (salto == -13) {
+			this.y -= salto * 0.5;
+			salto -= 0.5;
+			if (salto == -15) {
 				estado = 0;
-				salto = 13;
-				this.y += 13*0.5;
+				salto = 15;
+				this.y += 15 * 0.5;
 			}
 		}
 		
@@ -113,27 +113,43 @@ class Zulma extends GameElement{
 			this.inmune.alpha = 0;	
 		}
 		
+		//trace(cantVidas + " en la zulma " + this);
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
-				if (cantVidas > 0 ){
-					cantVidas--;
+				enemigo.morir();
+				if (cantVidas > 1 ) {
+					if (!esInmune) cantVidas--;
 					SoundManager.getInstance().playSound("tic");
-				}else {
+				} else {
 					escena.setEstado(3); /*Estado perdi*/
 				}
 			}       			
 		}
 		
+		// Colision contra power-ups
 		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {
 				power.consumir();
 			}
 		}
+		
+		//Disparar gato.
+		if (InputManager.getInstance().keyPressed('E')) {
+			var gb = GatoBala.getGatoBala();
+			if (gb != null) {
+				//trace ("salio");
+				gb.x = this.x;
+				gb.y = this.y;
+			} 
+			//else {
+				//trace ("no hay gato");
+			//}
+		}
+		
 	}
 	
 	public function isAlive():Bool {
-		trace("estare viva?" + cantVidas);
 		if (cantVidas > 0)
 			return true;
 		return false;
@@ -141,6 +157,10 @@ class Zulma extends GameElement{
 	
 	public function setVidas(vidas:Int) {
 		cantVidas = vidas;
+	}
+	
+	public function incrementarVidas() {
+		cantVidas++;
 	}
 
 }

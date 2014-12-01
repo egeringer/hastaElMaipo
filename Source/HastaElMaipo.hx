@@ -27,10 +27,14 @@ class HastaElMaipo extends engine.SceneManager {
 
 		
 		//Seteo las escenas
+
 		sceneMap.set('empresa', new Empresa());
 		sceneMap.set('game',new GameScene());
+		sceneMap.set('game',new RunnerScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
+		
+		sceneMap.set('boss', new BossScene());
 		//sceneMap.set('help',new HelpScene());
 		
 		//Empiezo el juego
@@ -43,7 +47,9 @@ class HastaElMaipo extends engine.SceneManager {
 		
 		
 		//Le doy play a la banda sonora del juego
-		backgroundMusic = Assets.getSound("main").play(0, 0, null);
+		//backgroundMusic = Assets.getSound("main").play(0, 100, null);
+		
+		//Al carajo la musica hasta nuevo aviso
 	}
 
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
