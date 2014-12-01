@@ -8,6 +8,7 @@ import flash.media.Sound;
 import engine.*;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import motion.Actuate;
 
 class MenuScene extends Scene {
 
@@ -19,7 +20,6 @@ class MenuScene extends Scene {
 		super();
 		
 		title = new Bitmap(Assets.getBitmapData("images/title.png"));
-			
 		jugar=new Boton(0xFF0000,300,100,"images/jugar.png",play);
 		ayuda=new Boton(0x00FF00,300,100,"images/ayuda.png",help);
 		
@@ -28,7 +28,7 @@ class MenuScene extends Scene {
 		this.addChild(ayuda);
 
 		title.x = 0;
-		title.y = 0;
+		title.y = -100;
 		
 		jugar.x=0;
 		jugar.y=200;
@@ -45,7 +45,9 @@ class MenuScene extends Scene {
 		HastaElMaipo.getInstance().setScene('help');
 	}
 
-	override public function show() {
+	override public function show() {		
+		//motion.Actuate.tween(title, 3, { positionX:positionX + 1, positionY:positionY + 1 } );
+		
 		/*
 		jugar.scaleX=jugar.scaleY=20;
 		jugar.alpha=0;
@@ -55,6 +57,7 @@ class MenuScene extends Scene {
 		ayuda.alpha=0;
 		motion.Actuate.tween(ayuda,3,{rotation:0,alpha:1}).delay(0.3);
 		*/
+		
 	}
 
 }

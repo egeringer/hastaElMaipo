@@ -27,14 +27,14 @@ class HastaElMaipo extends engine.SceneManager {
 
 		
 		//Seteo las escenas
+		sceneMap.set('empresa', new Empresa());
 		sceneMap.set('game',new GameScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
 		//sceneMap.set('help',new HelpScene());
 		
-		//Empiezo en la escena del Menu
-		setScene('menu');
-		
+		//Empiezo el juego
+		setScene('empresa');
 		
 		//Seteo los sonidos
 		soundManager = SoundManager.getInstance();
