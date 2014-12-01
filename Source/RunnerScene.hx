@@ -41,8 +41,9 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 3));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 3));
+			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 20));
+			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 14));
+			powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
 		}
 		powerTimer = 0;
 
@@ -89,14 +90,14 @@ class RunnerScene extends GameScene {
 		super.updateLogic(time);
 		enemyTimer -= time;
 		if (enemyTimer < 0) {
-			enemyTimer = Std.random(3) + 2;
+			enemyTimer = Std.random(4) + 2;
 			if (enemigos.length > 0) 
 				enemigos.pop().atacar();
 		}
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(5) + 2;
+			powerTimer = Std.random(30) + 2;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}

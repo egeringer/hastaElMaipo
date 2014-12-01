@@ -113,6 +113,7 @@ class Zulma extends GameElement{
 			this.inmune.alpha = 0;	
 		}
 		
+		trace(cantVidas + " en la zulma " + this);
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {

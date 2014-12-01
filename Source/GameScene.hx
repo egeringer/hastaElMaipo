@@ -66,10 +66,20 @@ class GameScene extends Scene {
 		zulma.setInmunidad();
 	}
 	
+	public function incrementarVidaPersonaje() {
+		zulma.incrementarVidas();
+	}
+	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
 		
 		if (estadoDelJuego == 3 ) {
+			for (power in powersActivos) {
+				power.quitarEfecto();
+			}
+			for (power in powerUps) {
+				power.quitarEfecto();
+			}
 			HastaElMaipo.getInstance().setScene('die');
 		}
 
@@ -78,6 +88,7 @@ class GameScene extends Scene {
 		
 		//timeToBoss++;
 		//trace(timeToBoss);
+		
 		//if (timeToBoss == nextBoss) {
 			//timeToBoss = 0;
 			//nextBoss += nextBoss;

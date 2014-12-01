@@ -45,7 +45,9 @@ class HastaElMaipo extends engine.SceneManager {
 		
 		
 		//Le doy play a la banda sonora del juego
-		backgroundMusic = Assets.getSound("main").play(0, 100, null);
+		//backgroundMusic = Assets.getSound("main").play(0, 100, null);
+		
+		//Al carajo la musica hasta nuevo aviso
 	}
 
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
