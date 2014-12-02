@@ -61,7 +61,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 200;
+		nextBoss = 1000;
 	}
 	
 	public function incrementarVelocidad(speed:Float) {

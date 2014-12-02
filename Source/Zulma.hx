@@ -61,6 +61,12 @@ class Zulma extends GameElement{
 			}
 		}
 		
+		if(InputManager.getInstance().mousePressed()){
+			if (estado != 1) {
+				estado = 1;
+			}
+		}
+		
 		if (estado == 1) {
 			this.y -= salto * 0.5;
 			salto -= 0.5;

@@ -10,29 +10,33 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 class DieScene extends Scene {
-
-	var jugar:Boton;
-	var ayuda:Boton;
+	var fondo:Bitmap;
+	var reintentar:Boton;
+	var irMenu:Boton;
 	var puntaje:TextField;
 
 
 	public function new(){
 		super();
 		
-			
-		jugar=new Boton(0xFF0000,300,100,"images/jugar.png",play);
-		ayuda=new Boton(0x00FF00,300,100,"images/ayuda.png",help);
+		fondo = new Bitmap(Assets.getBitmapData("images/game-over.jpg"));	
+		reintentar=new Boton(0xFF0000,300,100,"images/repeat.png",play);
+		irMenu=new Boton(0x00FF00,300,100,"images/home.png",goToMenu);
 		
-		this.addChild(jugar);
-		this.addChild(ayuda);
+		this.addChild(fondo);
+		this.addChild(reintentar);
+		this.addChild(irMenu);
+		
+		reintentar.x=80;
+		reintentar.y = 200;
+		reintentar.width = reintentar.height = 100;
 
+		irMenu.x=460;
+		irMenu.y = 200;
+		irMenu.width = irMenu.height = 100;
 		
-		jugar.x=0;
-		jugar.y=200;
-
-		ayuda.x=400;
-		ayuda.y = 200;
-		
+		fondo.x = 50;
+		fondo.y = 50;
 				
 		puntaje = new TextField();
 		puntaje.selectable=false;
@@ -50,8 +54,8 @@ class DieScene extends Scene {
 		HastaElMaipo.getInstance().setScene('game');
 	}
 
-	public function help(_){
-		HastaElMaipo.getInstance().setScene('help');
+	public function goToMenu(_){
+		HastaElMaipo.getInstance().setScene('menu');
 	}
 
 	override public function show() {

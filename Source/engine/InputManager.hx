@@ -2,6 +2,8 @@ package engine;
 
 import flash.display.Stage;
 import flash.events.KeyboardEvent;
+import flash.events.TouchEvent;
+import flash.events.MouseEvent;
 
 class InputManager {
 	
@@ -25,6 +27,13 @@ class InputManager {
 		// Suscribo los Eventos para el Teclado
 		stage.addEventListener(flash.events.KeyboardEvent.KEY_UP, onKeyUp);
 		stage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, onKeyDown);
+	
+		//stage.addEventListener(flash.events.TouchEvent.TOUCH_TAP, onTouch);
+		
+		stage.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+		stage.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+		
+		//stage.addEventListener(flash.events.TouchEvent.TOUCH_TAP, onTouch);
 	}
 
 	// Cuando se Suelta una Tecla
@@ -40,5 +49,22 @@ class InputManager {
     public function keyPressed(key:String):Bool{
     	return teclas[key.charCodeAt(0)];    
     }	
-    
+	
+	//jugando con el mouse y el touch
+	
+	private function onMouseDown(event:MouseEvent){
+			teclas[1]=true;
+	}
+	private function onMouseUp(event:MouseEvent){
+			teclas[1]=false;
+	}
+	public function mousePressed():Bool {
+		return teclas[1]; }
+	
+	
+	//public function onTouch(event: TouchEvent){
+			//trace("Me tocaron");
+	//}
+	
+
 }
