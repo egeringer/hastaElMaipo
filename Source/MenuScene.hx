@@ -11,24 +11,40 @@ import openfl.text.TextFormat;
 import motion.Actuate;
 
 class MenuScene extends Scene {
-
+	var fondo:Bitmap;
 	var jugar:Boton;
 	var ayuda:Boton;
 	var title:Bitmap;
 
+	var minita:Animation;
+	
 	public function new(){
 		super();
 		
+		fondo = new Bitmap(Assets.getBitmapData("images/maipo.jpg"));
 		title = new Bitmap(Assets.getBitmapData("images/title.png"));
 		jugar=new Boton(0xFF0000,300,100,"images/jugar.png",play);
-		ayuda=new Boton(0x00FF00,300,100,"images/ayuda.png",help);
+		ayuda = new Boton(0x00FF00, 300, 100, "images/ayuda.png", help);
 		
+		minita = new Animation(Assets.getBitmapData("images/corriendo_nuevo.png"), 13, 1);
+		
+		minita.x = 10;
+		minita.y = 280;
+		minita.alpha = 1;
+		
+		this.addChild(fondo);
 		this.addChild(title);
 		this.addChild(jugar);
 		this.addChild(ayuda);
-
+		
+		this.addChild(minita);
+		hijos.push(minita);
+		
+		fondo.x = 0;
+		fondo.y = 0;
+		
 		title.x = 0;
-		title.y = -100;
+		title.y = 0;
 		
 		jugar.x=0;
 		jugar.y=200;
