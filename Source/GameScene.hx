@@ -16,6 +16,9 @@ class GameScene extends Scene {
 	public var powerUps(default, null):Array<PowerUp>;
 	public var powersActivos(default, null):Array<PowerUp>;
 	
+	public var pozos(default, null):Array<Pozo>;
+	public var pozosActivos(default, null):Array<Pozo>;
+	
 	private var backBtn:Boton;
 	
 	private var fondo1:FondoAnimado;

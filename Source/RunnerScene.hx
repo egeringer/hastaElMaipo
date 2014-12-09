@@ -1,5 +1,6 @@
 package ;
 
+import openfl.display.Sprite;
 import engine.*;
 /**
  * ...
@@ -9,6 +10,7 @@ class RunnerScene extends GameScene {
 
 	private var enemyTimer:Float;
 	private var powerTimer:Float;
+	private var pozoTimer:Float;
 	
 	public function new() {
 		super();
@@ -53,6 +55,12 @@ class RunnerScene extends GameScene {
 			enemigos.push(new Enemigo(this, 300));
 		enemyTimer = 0;
 		
+		pozos = new Array<Pozo>();
+		pozosActivos = new Array<Pozo>();
+		for (i in 0 ... 10)
+			pozos.push(new Pozo(this, 300));
+		pozoTimer = 0;
+		
 		zulma = new Zulma(this);
 		addChild(zulma);
 		hijos.push(zulma);
@@ -73,6 +81,10 @@ class RunnerScene extends GameScene {
 			enemigo.incrementarVelocidad(speed);
 		for (enemigo in enemigosActivos)
 			enemigo.incrementarVelocidad(speed);
+		for (pozo in pozos)
+			pozo.incrementarVelocidad(speed);
+		for (pozo in pozosActivos)
+			pozo.incrementarVelocidad(speed);
 	}
 	
 	public function decrementarVelocidad(speed:Float) {
@@ -84,6 +96,10 @@ class RunnerScene extends GameScene {
 			enemigo.decrementarVelocidad(speed);
 		for (enemigo in enemigosActivos)
 			enemigo.decrementarVelocidad(speed);
+		for (pozo in pozos)
+			pozo.decrementarVelocidad(speed);
+		for (pozo in pozosActivos)
+			pozo.decrementarVelocidad(speed);
 	}
 	
 	override public function updateLogic(time:Float) {
@@ -100,6 +116,13 @@ class RunnerScene extends GameScene {
 			powerTimer = Std.random(30) + 2;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
+		}
+		
+		pozoTimer -= time;
+		if (pozoTimer < 0) {
+			pozoTimer = Std.random(10);
+			if (pozos.length > 0)
+				pozos.pop().aparecer();
 		}
 		
 		timeToBoss++;

@@ -41,6 +41,8 @@ class BossScene extends GameScene {
 		powersActivos = new Array<PowerUp>();
 		enemigos = new Array<Enemigo>();
 		enemigosActivos = new Array<Enemigo>();
+		pozos = new Array<Pozo>();
+		pozosActivos = new Array<Pozo>();
 		
 		zulma = new Zulma(this);
 		addChild(zulma);

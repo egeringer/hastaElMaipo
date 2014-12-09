@@ -133,6 +133,13 @@ class Zulma extends GameElement{
 			}       			
 		}
 		
+		// Colision contra pozos
+		for (pozo in escena.pozosActivos) {
+			if (GameScene.detectarColision(this, pozo)) {
+				escena.setEstado(3); /*Estado perdi*/
+			}
+		}
+		
 		// Colision contra power-ups
 		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {

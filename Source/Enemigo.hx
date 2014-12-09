@@ -36,7 +36,7 @@ class Enemigo extends GameElement{
 
 	public function atacar(){
 		this.x = 1500;
-		this.y = escena.height-this.height-51;//51 es la altura del piso
+		this.y = escena.height - this.height - 51;//51 es la altura del piso
 		this.estado=1;
 		escena.hijos.push(this);
 		escena.addChild(this);
