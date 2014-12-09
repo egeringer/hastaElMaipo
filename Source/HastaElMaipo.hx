@@ -46,13 +46,20 @@ class HastaElMaipo extends engine.SceneManager {
 		soundManager.addSound("main", Assets.getSound ("main"));
 		soundManager.addSound("tic", Assets.getSound ("tic"));
 		
-		
+		stage.addEventListener(openfl.events.Event.RESIZE,onResize);
 		//Le doy play a la banda sonora del juego
 		//backgroundMusic = Assets.getSound("main").play(0, 100, null);
 		
 		//Al carajo la musica hasta nuevo aviso
 	}
-
+	
+	public function onResize(_){
+		var s:Float = Math.min(stage.stageWidth/720, stage.stageHeight/400);
+		this.scaleX = this.scaleY = s;
+		this.x = (stage.stageWidth - 720 * s) / 2;
+		this.y = (stage.stageHeight - 400 * s) / 2;
+	}
+	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e){
 		this.updateLogic(1/60);
