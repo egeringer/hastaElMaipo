@@ -10,43 +10,69 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 class DieScene extends Scene {
-	var fondo:Bitmap;
 	var reintentar:Boton;
 	var irMenu:Boton;
 	var puntaje:TextField;
+	var marquee:Animation;
+	
+	private var fondo1:FondoAnimado;
+	private var fondo2:FondoAnimado;
+	private var fondo3:FondoAnimado;
+	private var fondo3punto5:FondoAnimado;
+	private var fondo4:FondoAnimado;
 
 
 	public function new(){
 		super();
 		
-		fondo = new Bitmap(Assets.getBitmapData("images/game-over.jpg"));	
-		reintentar=new Boton(0xFF0000,300,100,"images/repeat.png",play);
-		irMenu=new Boton(0x00FF00,300,100,"images/home.png",goToMenu);
+		//REMOVER TODO ESTO Y PONERLO EN ALGUN LADO EN COMUN
+		fondo1 = new FondoAnimado('images/bkg-4.png', 0);
+		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 30);
+		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
+		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
+		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
+		addChild(fondo1);
+		addChild(fondo3punto5);
+		addChild(fondo2);
+		addChild(fondo3);
+		addChild(fondo4);
+		hijos.push(fondo1);
+		hijos.push(fondo3punto5);
+		hijos.push(fondo2);
+		hijos.push(fondo3);
+		hijos.push(fondo4);
+
+		marquee = new Animation(Assets.getBitmapData("images/menu-marquee.png"), 2, 1);
+		reintentar=new Boton(0xFF0000,300,100,"images/menu-reintentar.png",play);
+		irMenu=new Boton(0x00FF00,300,100,"images/menu-ir-home.png",goToMenu);
 		
-		this.addChild(fondo);
+		this.addChild(marquee);
 		this.addChild(reintentar);
 		this.addChild(irMenu);
 		
-		reintentar.x=80;
-		reintentar.y = 200;
-		reintentar.width = reintentar.height = 100;
-
-		irMenu.x=460;
-		irMenu.y = 200;
-		irMenu.width = irMenu.height = 100;
+		hijos.push(marquee);
 		
-		fondo.x = 50;
-		fondo.y = 50;
+		reintentar.x=160;
+		reintentar.y = 230;
+
+		irMenu.x= 250;
+		irMenu.y = 307;
+				
+		marquee.x = 20;
+		marquee.y = 15;
 				
 		puntaje = new TextField();
 		puntaje.selectable=false;
 		puntaje.width=300;
 		puntaje.height=100;
-		var tf=new TextFormat('fonts/showtime.ttf',30,0xFFFFFF);
+		var tf=new TextFormat('fonts/OratorStd.otf',24,0x000000);
 		puntaje.setTextFormat(tf);
 		puntaje.defaultTextFormat=tf;
 
 		this.addChild(puntaje);
+		
+		puntaje.x =250;
+		puntaje.y =186;
 		
 	}
 
@@ -59,16 +85,7 @@ class DieScene extends Scene {
 	}
 
 	override public function show() {
-		puntaje.text='MAX SCORE: '+Persistence.getScore();
-		/*
-		jugar.scaleX=jugar.scaleY=20;
-		jugar.alpha=0;
-		motion.Actuate.tween(jugar,0.2,{scaleX:1,scaleY:1,alpha:1});
-
-		ayuda.rotation=2000;
-		ayuda.alpha=0;
-		motion.Actuate.tween(ayuda,3,{rotation:0,alpha:1}).delay(0.3);
-		*/
+		puntaje.text=Persistence.getScore()+' ZULMETROS';
 	}
 
 }

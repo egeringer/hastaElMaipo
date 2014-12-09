@@ -18,9 +18,9 @@ class RunnerScene extends GameScene {
 		
 		setEstado(1); /*Jugando*/
 		
-		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('menu'); } );
-
-		fondo1 = new FondoAnimado('images/bkg-4.png', 2);
+		backBtn = new Boton(0xFFFFFF, 20, 20, "images/pausa.png", function(_) { setEstado(2);/*Pausado*/ HastaElMaipo.getInstance().setScene('pausa'); } );
+		
+		fondo1 = new FondoAnimado('images/bkg-4.png', 0);
 		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 30);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
@@ -37,7 +37,7 @@ class RunnerScene extends GameScene {
 		hijos.push(fondo2);
 		hijos.push(fondo3);
 		hijos.push(fondo4);
-		
+
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
