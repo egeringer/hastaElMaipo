@@ -17,12 +17,19 @@
 	<icon path="Assets/openfl.svg" />
 	
 	 <assets path="Assets/sounds" rename="sounds" if="web">
-            <sound path="main.mp3" id="main" />
-			<sound path="3.mp3" id="tic" />
+		<sound path="main.mp3" id="main" />
+		<sound path="die.mp3" id="die" />
+		<sound path="powerup.mp3" id="powerup" />		
+		<sound path="fall.mp3" id="fall" />
+		<sound path="enemydie.mp3" id="enemydie" />
+
     </assets>
     <assets path="Assets/sounds" rename="sounds" unless="web">
-            <sound path="main.wav" id="main" />
-			<sound path="3.wav" id="tic" />
+		<sound path="main.wav" id="main" />
+		<sound path="die.ogg" id="die" />
+		<sound path="powerup.ogg" id="powerup" />
+		<sound path="fall.ogg" id="fall" />
+		<sound path="enemydie.ogg" id="enemydie" />
     </assets>
 
 	

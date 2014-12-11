@@ -3,6 +3,7 @@ package ;
 import haxe.Timer;
 import openfl.Assets;
 import openfl.display.Bitmap;
+import engine.*;
 /**
  * ...
  * @author ...
@@ -19,6 +20,7 @@ class PUVida extends PowerUp {
 	}
 	
 	override public function consumir() {
+		SoundManager.getInstance().playSound("powerup");
 		desaparecer();
 		aplicarEfecto();
 	}

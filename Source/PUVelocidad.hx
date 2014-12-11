@@ -3,6 +3,7 @@ package ;
 import haxe.Timer;
 import openfl.Assets;
 import openfl.display.Bitmap;
+import engine.*;
 /**
  * ...
  * @author ...
@@ -20,6 +21,7 @@ class PUVelocidad extends PowerUp {
 	}
 	
 	override public function consumir() {
+		SoundManager.getInstance().playSound("powerup");
 		desaparecer();
 		aplicarEfecto();
 		Timer.delay(quitarEfecto, tiempoEfecto * 1000);

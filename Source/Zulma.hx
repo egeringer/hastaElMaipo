@@ -22,9 +22,9 @@ class Zulma extends GameElement{
 		super();
 		escena = scene;
 		
-		caminando = new Animation(Assets.getBitmapData("images/zulma_corriendo_small.png"), 6, 1);	
-		corriendo = new Animation(Assets.getBitmapData("images/zulma_corre.png"), 16, 1);
-		inmune = new Animation(Assets.getBitmapData("images/zulma_defensa.png"), 16, 1);
+		caminando = new Animation(Assets.getBitmapData("images/zulma_caminando.png"), 6, 1);	
+		corriendo = new Animation(Assets.getBitmapData("images/zulma_corriendo.png"), 6, 1);
+		inmune = new Animation(Assets.getBitmapData("images/zulma_defendiendo.png"), 6, 1);
 		
 		caminando.alpha = 1;
 		corriendo.alpha = 0;
@@ -43,7 +43,7 @@ class Zulma extends GameElement{
 		
 		shootTimer = 0;
 		setVidas(1);
-		salto = 15;
+		salto = 17;
 		estado = 0; //Caminando
 		esInmune = false;
 	}
@@ -70,10 +70,10 @@ class Zulma extends GameElement{
 		if (estado == 1) {
 			this.y -= salto * 0.5;
 			salto -= 0.5;
-			if (salto == -15) {
+			if (salto == -17) {
 				estado = 0;
-				salto = 15;
-				this.y += 15 * 0.5;
+				salto = 17;
+				this.y += 17 * 0.5;
 			}
 		}
 		
@@ -118,16 +118,16 @@ class Zulma extends GameElement{
 			this.caminando.alpha = 1;
 			this.inmune.alpha = 0;	
 		}
-		
-		//trace(cantVidas + " en la zulma " + this);
+
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
 				enemigo.morir();
-				if (cantVidas > 1 ) {
-					if (!esInmune) cantVidas--;
-					SoundManager.getInstance().playSound("tic");
-				} else {
+				if (esInmune) SoundManager.getInstance().playSound("enemydie");
+				else cantVidas--;
+				
+				if (cantVidas < 1 ) {
+					SoundManager.getInstance().playSound("die");
 					escena.setEstado(3); /*Estado perdi*/
 				}
 			}       			
@@ -136,6 +136,7 @@ class Zulma extends GameElement{
 		// Colision contra pozos
 		for (pozo in escena.pozosActivos) {
 			if (GameScene.detectarColision(this, pozo)) {
+				SoundManager.getInstance().playSound("fall");
 				escena.setEstado(3); /*Estado perdi*/
 			}
 		}
@@ -143,6 +144,7 @@ class Zulma extends GameElement{
 		// Colision contra power-ups
 		for (power in escena.powersActivos) {
 			if (GameScene.detectarColision(this, power)) {
+				SoundManager.getInstance().playSound("powerup");
 				power.consumir();
 			}
 		}

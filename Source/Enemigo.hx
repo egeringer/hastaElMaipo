@@ -26,7 +26,7 @@ class Enemigo extends GameElement{
 		velocidad = speed;
 	}
 
-	public function morir(){
+	public function morir() {
 		estado=0;
 		escena.enemigos.push(this);
 		escena.enemigosActivos.remove(this);

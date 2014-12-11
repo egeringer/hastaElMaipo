@@ -27,7 +27,7 @@ class Boss extends GameElement {
 		this.x = 600;
 		this.y = escena.height - this.height - 51; //51 es la altura del piso.
 		hijos.push(imagen);
-		alturaSalto = 15;
+		alturaSalto = 12;
 		cantVidas = 5;
 		
 		tiempoDisparo = 0;
@@ -51,15 +51,14 @@ class Boss extends GameElement {
 			}
 		}
 		
-		var haySalto:Int = Std.random(2);
-		trace(haySalto);
+		var haySalto:Int = Std.random(3);
 		if (haySalto == 1) {
 			this.y -= alturaSalto * 0.5;
 			alturaSalto -= 0.5;
-			if (alturaSalto == -15) {
+			if (alturaSalto == -12) {
 				estado = 0;
-				alturaSalto = 15;
-				this.y += 15 * 0.5;
+				alturaSalto = 12;
+				this.y += 12 * 0.5;
 			}
 		}
 	}

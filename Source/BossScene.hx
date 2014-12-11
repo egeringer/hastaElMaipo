@@ -58,6 +58,6 @@ class BossScene extends GameScene {
 	}
 	
 	override public function updateLogic(time:Float) {
-		super.updateLogic(time);
+		super.updateLogic(time);		
 	}
 }

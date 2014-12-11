@@ -43,23 +43,23 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 20));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 14));
+			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
 			powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
 		}
-		powerTimer = 0;
+		powerTimer = 3;
 
 		enemigos = new Array<Enemigo>();
 		enemigosActivos = new Array<Enemigo>();
 		for (i in 0 ... 10) 
 			enemigos.push(new Enemigo(this, 300));
-		enemyTimer = 0;
+		enemyTimer = 4;
 		
 		pozos = new Array<Pozo>();
 		pozosActivos = new Array<Pozo>();
 		for (i in 0 ... 10)
 			pozos.push(new Pozo(this, 300));
-		pozoTimer = 0;
+		pozoTimer = 2;
 		
 		zulma = new Zulma(this);
 		addChild(zulma);
@@ -69,7 +69,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 800; //Aca setea el tiempo hasta el boss
+		nextBoss = 4000; //Aca setea el tiempo hasta el boss
 	}
 	
 	public function incrementarVelocidad(speed:Float) {
@@ -106,21 +106,21 @@ class RunnerScene extends GameScene {
 		super.updateLogic(time);
 		enemyTimer -= time;
 		if (enemyTimer < 0) {
-			enemyTimer = Std.random(4) + 2;
+			enemyTimer = Std.random(6) + 2;
 			if (enemigos.length > 0) 
 				enemigos.pop().atacar();
 		}
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(30) + 2;
+			powerTimer = Std.random(20) + 3;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}
 		
 		pozoTimer -= time;
 		if (pozoTimer < 0) {
-			pozoTimer = Std.random(10);
+			pozoTimer = Std.random(10) + 1;
 			if (pozos.length > 0)
 				pozos.pop().aparecer();
 		}

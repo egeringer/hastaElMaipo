@@ -44,7 +44,10 @@ class HastaElMaipo extends engine.SceneManager {
 		//Seteo los sonidos
 		soundManager = SoundManager.getInstance();
 		soundManager.addSound("main", Assets.getSound ("main"));
-		soundManager.addSound("tic", Assets.getSound ("tic"));
+		soundManager.addSound("die", Assets.getSound ("die"));
+		soundManager.addSound("powerup", Assets.getSound ("powerup"));
+		soundManager.addSound("fall", Assets.getSound ("fall"));
+		soundManager.addSound("enemydie", Assets.getSound ("enemydie"));
 		
 		stage.addEventListener(openfl.events.Event.RESIZE,onResize);
 		//Le doy play a la banda sonora del juego
