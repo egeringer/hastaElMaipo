@@ -85,6 +85,7 @@ class RunnerScene extends GameScene {
 			pozo.incrementarVelocidad(speed);
 		for (pozo in pozosActivos)
 			pozo.incrementarVelocidad(speed);
+		zulma.setCorriendo();
 	}
 	
 	public function decrementarVelocidad(speed:Float) {
@@ -100,6 +101,7 @@ class RunnerScene extends GameScene {
 			pozo.decrementarVelocidad(speed);
 		for (pozo in pozosActivos)
 			pozo.decrementarVelocidad(speed);
+		zulma.setCorriendo();
 	}
 	
 	override public function updateLogic(time:Float) {

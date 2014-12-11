@@ -17,6 +17,7 @@ class Zulma extends GameElement{
 	var salto:Float;
 	var cantVidas:Int;
 	var esInmune:Bool;
+	var esCorriendo:Bool;
 	
 	public function new (scene:GameScene) {
 		super();
@@ -46,10 +47,33 @@ class Zulma extends GameElement{
 		salto = 17;
 		estado = 0; //Caminando
 		esInmune = false;
+		esCorriendo = false;
 	}
 	
 	public function setInmunidad() {
 		esInmune = !esInmune;
+		if (esInmune) {
+			this.caminando.alpha = 0;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 1;
+		}else {
+			this.caminando.alpha = 1;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 0;
+		}
+	}
+	
+	public function setCorriendo() {
+		esCorriendo = !esCorriendo;
+		if (esCorriendo) {
+			this.caminando.alpha = 0;
+			this.corriendo.alpha = 1;
+			this.inmune.alpha = 0;
+		}else {
+			this.caminando.alpha = 1;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 0;
+		}
 	}
 	
 	override public function updateLogic(time:Float){
@@ -111,14 +135,7 @@ class Zulma extends GameElement{
 		}
 		*/
 		
-       	if (esInmune) {
-			this.caminando.alpha = 0;
-			this.inmune.alpha = 1;
-		} else {
-			this.caminando.alpha = 1;
-			this.inmune.alpha = 0;	
-		}
-
+       	
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
