@@ -44,6 +44,10 @@ class Zulma extends GameElement{
 		hijos.push(inmune);
 		
 		shootTimer = 0;
+		
+		//Lo siguiente esta mal porque si cerras el juego
+		//Te quedan las vidas que tenias, y empezas con eso
+		//Pero sirve para compartir las vidas entre el Runner y el Boss Scene.
 		cantVidas = Persistence.getVidas();
 		if (cantVidas < 1) {
 			Persistence.setVidas(1);
@@ -196,18 +200,21 @@ class Zulma extends GameElement{
 	
 	public function setVidas(vidasAux:Int) {
 		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
 	}
 	
 	public function incrementarVidas() {
 		vidasAux = Persistence.getVidas();
 		vidasAux++;
 		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
 	}
 	
 	public function decrementarVidas() {
 		vidasAux = Persistence.getVidas();
 		vidasAux--;
 		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
 	}
 	
 

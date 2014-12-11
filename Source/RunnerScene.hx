@@ -2,6 +2,8 @@ package ;
 
 import openfl.display.Sprite;
 import engine.*;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 /**
  * ...
  * @author ...
@@ -69,7 +71,25 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 4000; //Aca setea el tiempo hasta el boss
+		nextBoss = 1000; //Aca setea el tiempo hasta el boss
+		
+				
+			//VIDAS EN PANTALLA
+		vidasPantalla = new TextField();
+		vidasPantalla.selectable=false;
+		vidasPantalla.width=300;
+		vidasPantalla.height=100;
+		var tf=new TextFormat('fonts/OratorStd.otf',24,0xFFFFFF);
+		vidasPantalla.setTextFormat(tf);
+		vidasPantalla.defaultTextFormat=tf;
+
+		this.addChild(vidasPantalla);
+		
+		vidasPantalla.x = 50;
+		vidasPantalla.y = 0;
+		
+		refreshVidas();
+	
 	}
 	
 	public function personajeInmune() {
