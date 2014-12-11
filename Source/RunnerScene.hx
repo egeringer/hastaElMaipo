@@ -43,8 +43,8 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
+			//powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+			//powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
 			powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
 		}
 		powerTimer = 3;
@@ -70,6 +70,14 @@ class RunnerScene extends GameScene {
 		
 		timeToBoss = 0;
 		nextBoss = 4000; //Aca setea el tiempo hasta el boss
+	}
+	
+	public function personajeInmune() {
+		zulma.setInmunidad();
+	}
+	
+	public function incrementarVidaPersonaje() {
+		zulma.incrementarVidas();
 	}
 	
 	public function incrementarVelocidad(speed:Float) {

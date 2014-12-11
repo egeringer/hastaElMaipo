@@ -65,14 +65,6 @@ class GameScene extends Scene {
 			//enemigo.decrementarVelocidad(speed);
 	//}
 	
-	public function personajeInmune() {
-		zulma.setInmunidad();
-	}
-	
-	public function incrementarVidaPersonaje() {
-		zulma.incrementarVidas();
-	}
-	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
 		
