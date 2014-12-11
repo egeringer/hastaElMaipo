@@ -30,6 +30,7 @@ class HastaElMaipo extends engine.SceneManager {
 
 		sceneMap.set('empresa', new Empresa());
 		sceneMap.set('game', new GameScene());
+		sceneMap.set('intro', new IntroScene());
 		sceneMap.set('pausa', new PauseScene());
 		sceneMap.set('game',new RunnerScene());
 		sceneMap.set('menu', new MenuScene());

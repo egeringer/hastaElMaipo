@@ -26,7 +26,7 @@ class Empresa extends Scene
 	override public function show() {
 		empresa.alpha = 0;	
 		motion.Actuate.tween(empresa, 8, { alpha:1 } );
-		motion.Actuate.tween (empresa, 2, { alpha: 0 }, false).delay(2).onComplete (function() HastaElMaipo.getInstance().setScene('menu'));	
+		motion.Actuate.tween (empresa, 2, { alpha: 0 }, false).delay(2).onComplete (function() HastaElMaipo.getInstance().setScene('intro'));	
 		}	       	
 	
 }
