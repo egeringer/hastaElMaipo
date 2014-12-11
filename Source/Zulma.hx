@@ -22,7 +22,7 @@ class Zulma extends GameElement{
 		super();
 		escena = scene;
 		
-		caminando = new Animation(Assets.getBitmapData("images/zulma_corriendo_small.png"), 16, 1);	
+		caminando = new Animation(Assets.getBitmapData("images/zulma_corriendo_small.png"), 6, 1);	
 		corriendo = new Animation(Assets.getBitmapData("images/zulma_corre.png"), 16, 1);
 		inmune = new Animation(Assets.getBitmapData("images/zulma_defensa.png"), 16, 1);
 		

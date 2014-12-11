@@ -21,7 +21,7 @@ class Boss extends GameElement {
 		super();
 		escena = scene;
 		//Cambiar sprite enemigo
-		imagen = new Animation(Assets.getBitmapData("images/power_defense.png"), 1, 1);
+		imagen = new Animation(Assets.getBitmapData("images/boss.png"), 4, 1);
 		
 		this.addChild(imagen);
 		this.x = 600;

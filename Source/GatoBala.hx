@@ -13,8 +13,8 @@ class GatoBala extends GameElement {
 	
 	public function new() {
 		super();
-		imagen = new Animation(Assets.getBitmapData("images/nyan_cat.png"), 1, 1);
-		imagen.scaleX = imagen.scaleY = 0.25;
+		imagen = new Animation(Assets.getBitmapData("images/arma-zulma.png"), 1, 1);
+		imagen.scaleX = imagen.scaleY = 0.07;
 		this.addChild(imagen);
 		hijos.push(imagen);
 		visible = false;

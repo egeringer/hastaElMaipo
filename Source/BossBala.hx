@@ -13,7 +13,7 @@ class BossBala extends GameElement {
 	
 	public function new() {
 		super();
-		imagen = new Animation(Assets.getBitmapData("images/power_life.png"), 1, 1);
+		imagen = new Animation(Assets.getBitmapData("images/arma-boss-1.png"), 6, 1);
 		this.addChild(imagen);
 		hijos.push(imagen);
 		visible = false;

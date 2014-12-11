@@ -14,7 +14,7 @@ class Pozo extends GameElement {
 	
 	public function new (scene:GameScene, speed:Float) {
 		super();
-		pozo = new Animation(Assets.getBitmapData("images/pozo.png"), 1, 8);
+		pozo = new Animation(Assets.getBitmapData("images/pozo.png"), 1, 1);
 		this.addChild(pozo);
 		this.hijos.push(pozo);
 		escena = scene;

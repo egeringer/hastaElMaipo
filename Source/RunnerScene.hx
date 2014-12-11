@@ -26,7 +26,7 @@ class RunnerScene extends GameScene {
 		fondo3punto5 = new FondoAnimado('images/bkg-3-5.png', 30);
 		fondo2 = new FondoAnimado('images/bkg-3.png', 10);
 		fondo3 = new FondoAnimado('images/bkg-2.png', 70);
-		fondo4 = new FondoAnimado('images/bkg-1.png', 70);
+		fondo4 = new FondoAnimado('images/bkg-1.png', 300);
 		
 		addChild(fondo1);
 		addChild(fondo3punto5);
@@ -69,7 +69,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 1000;
+		nextBoss = 800; //Aca setea el tiempo hasta el boss
 	}
 	
 	public function incrementarVelocidad(speed:Float) {

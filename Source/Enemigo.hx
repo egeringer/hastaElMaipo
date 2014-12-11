@@ -19,7 +19,7 @@ class Enemigo extends GameElement{
 	public function new (scene:GameScene, speed:Float) {
 		super();
 		numero = Std.random(4) + 1;
-		volando = new Animation(Assets.getBitmapData("images/brainy_idle_"+numero+".png"), 1, 8);
+		volando = new Animation(Assets.getBitmapData("images/enemigo"+numero+".png"), 1, 1);
 		this.addChild(volando);
 		this.hijos.push(volando);
 		escena = scene;
@@ -36,7 +36,7 @@ class Enemigo extends GameElement{
 
 	public function atacar(){
 		this.x = 1500;
-		this.y = escena.height - this.height - 51;//51 es la altura del piso
+		this.y = escena.height - this.height - 36;//51 es la altura del piso
 		this.estado=1;
 		escena.hijos.push(this);
 		escena.addChild(this);
