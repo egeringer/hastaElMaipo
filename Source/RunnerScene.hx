@@ -45,8 +45,8 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 		for (i in 0 ... 4) {
-			//powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
-			//powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
+			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
 			powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
 		}
 		powerTimer = 3;
@@ -71,7 +71,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 1000; //Aca setea el tiempo hasta el boss
+		nextBoss = 3000; //Aca setea el tiempo hasta el boss
 		
 				
 			//VIDAS EN PANTALLA
