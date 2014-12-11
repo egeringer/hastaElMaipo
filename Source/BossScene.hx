@@ -1,6 +1,8 @@
 package ;
 
 import engine.*;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 /**
  * ...
  * @author ...
@@ -55,6 +57,23 @@ class BossScene extends GameScene {
 		
 		GatoBala.init(this);
 		BossBala.init(this);
+		
+				
+			//VIDAS EN PANTALLA
+		vidasPantalla = new TextField();
+		vidasPantalla.selectable=false;
+		vidasPantalla.width=300;
+		vidasPantalla.height=100;
+		var tf=new TextFormat('fonts/OratorStd.otf',24,0xFFFFFF);
+		vidasPantalla.setTextFormat(tf);
+		vidasPantalla.defaultTextFormat=tf;
+
+		this.addChild(vidasPantalla);
+		
+		vidasPantalla.x = 50;
+		vidasPantalla.y = 0;
+		
+		refreshVidas();
 	}
 	
 	override public function updateLogic(time:Float) {

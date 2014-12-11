@@ -5,6 +5,8 @@ import flash.Lib;
 import flash.display.Bitmap;
 import openfl.Assets;
 import engine.*;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 
 class GameScene extends Scene {
 
@@ -27,6 +29,9 @@ class GameScene extends Scene {
 	private var fondo3punto5:FondoAnimado;
 	private var fondo4:FondoAnimado;
 	
+	
+	private var vidasPantalla:TextField;
+	
 	//private var enemyTimer:Float;
 	//private var powerTimer:Float;
 	private static var puntaje:Int = 0;
@@ -38,6 +43,7 @@ class GameScene extends Scene {
 	public function new () {
 		super();
 		initScene();
+		
 	}
 
 	private function initScene() {}
@@ -64,14 +70,6 @@ class GameScene extends Scene {
 		//for (enemigo in enemigosActivos)
 			//enemigo.decrementarVelocidad(speed);
 	//}
-	
-	public function personajeInmune() {
-		zulma.setInmunidad();
-	}
-	
-	public function incrementarVidaPersonaje() {
-		zulma.incrementarVidas();
-	}
 	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
@@ -115,6 +113,10 @@ class GameScene extends Scene {
        	
 	}
 
+	public function refreshVidas() {
+		vidasPantalla.text="Vidas: "+Persistence.getVidas();
+	}
+	
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.
     public static function detectarColision(obj1:GameElement,obj2:GameElement):Bool {
 		if (obj1.x + obj1.width > obj2.x && obj1.x < obj2.x + obj2.width) {

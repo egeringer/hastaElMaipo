@@ -16,7 +16,9 @@ class Zulma extends GameElement{
 	var shootTimer:Float;
 	var salto:Float;
 	var cantVidas:Int;
+	var vidasAux:Int;
 	var esInmune:Bool;
+	var esCorriendo:Bool;
 	
 	public function new (scene:GameScene) {
 		super();
@@ -42,14 +44,45 @@ class Zulma extends GameElement{
 		hijos.push(inmune);
 		
 		shootTimer = 0;
-		setVidas(1);
+		
+		//Lo siguiente esta mal porque si cerras el juego
+		//Te quedan las vidas que tenias, y empezas con eso
+		//Pero sirve para compartir las vidas entre el Runner y el Boss Scene.
+		cantVidas = Persistence.getVidas();
+		if (cantVidas < 1) {
+			Persistence.setVidas(1);
+		}
+	
 		salto = 17;
 		estado = 0; //Caminando
 		esInmune = false;
+		esCorriendo = false;
 	}
 	
 	public function setInmunidad() {
 		esInmune = !esInmune;
+		if (esInmune) {
+			this.caminando.alpha = 0;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 1;
+		}else {
+			this.caminando.alpha = 1;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 0;
+		}
+	}
+	
+	public function setCorriendo() {
+		esCorriendo = !esCorriendo;
+		if (esCorriendo) {
+			this.caminando.alpha = 0;
+			this.corriendo.alpha = 1;
+			this.inmune.alpha = 0;
+		}else {
+			this.caminando.alpha = 1;
+			this.corriendo.alpha = 0;
+			this.inmune.alpha = 0;
+		}
 	}
 	
 	override public function updateLogic(time:Float){
@@ -111,22 +144,15 @@ class Zulma extends GameElement{
 		}
 		*/
 		
-       	if (esInmune) {
-			this.caminando.alpha = 0;
-			this.inmune.alpha = 1;
-		} else {
-			this.caminando.alpha = 1;
-			this.inmune.alpha = 0;	
-		}
-
+       	
 		// Colision contra enemigos
 		for (enemigo in escena.enemigosActivos) {
 			if (GameScene.detectarColision(this, enemigo)) {
 				enemigo.morir();
 				if (esInmune) SoundManager.getInstance().playSound("enemydie");
-				else cantVidas--;
+				else decrementarVidas();
 				
-				if (cantVidas < 1 ) {
+				if (!isAlive()) {
 					SoundManager.getInstance().playSound("die");
 					escena.setEstado(3); /*Estado perdi*/
 				}
@@ -137,6 +163,7 @@ class Zulma extends GameElement{
 		for (pozo in escena.pozosActivos) {
 			if (GameScene.detectarColision(this, pozo)) {
 				SoundManager.getInstance().playSound("fall");
+				setVidas(0);
 				escena.setEstado(3); /*Estado perdi*/
 			}
 		}
@@ -165,17 +192,30 @@ class Zulma extends GameElement{
 	}
 	
 	public function isAlive():Bool {
-		if (cantVidas > 0)
+		vidasAux = Persistence.getVidas();
+		if (vidasAux > 0)
 			return true;
 		return false;
 	}
 	
-	public function setVidas(vidas:Int) {
-		cantVidas = vidas;
+	public function setVidas(vidasAux:Int) {
+		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
 	}
 	
 	public function incrementarVidas() {
-		cantVidas++;
+		vidasAux = Persistence.getVidas();
+		vidasAux++;
+		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
 	}
+	
+	public function decrementarVidas() {
+		vidasAux = Persistence.getVidas();
+		vidasAux--;
+		Persistence.setVidas(vidasAux);
+		escena.refreshVidas();
+	}
+	
 
 }

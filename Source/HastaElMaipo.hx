@@ -52,7 +52,7 @@ class HastaElMaipo extends engine.SceneManager {
 		
 		stage.addEventListener(openfl.events.Event.RESIZE,onResize);
 		//Le doy play a la banda sonora del juego
-		//backgroundMusic = Assets.getSound("main").play(0, 100, null);
+		backgroundMusic = Assets.getSound("main").play(0, 100, null);
 		
 		//Al carajo la musica hasta nuevo aviso
 	}

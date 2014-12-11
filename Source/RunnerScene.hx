@@ -2,6 +2,8 @@ package ;
 
 import openfl.display.Sprite;
 import engine.*;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 /**
  * ...
  * @author ...
@@ -42,12 +44,15 @@ class RunnerScene extends GameScene {
 
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
-		for (i in 0 ... 4) {
-			powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
-			powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
-			powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
-		}
-		powerTimer = 3;
+						
+		powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
+		powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
+		powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+		powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
+		powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
+		powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+		
+		powerTimer = 0;
 
 		enemigos = new Array<Enemigo>();
 		enemigosActivos = new Array<Enemigo>();
@@ -69,7 +74,33 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 4000; //Aca setea el tiempo hasta el boss
+		nextBoss = 3000; //Aca setea el tiempo hasta el boss
+		
+				
+			//VIDAS EN PANTALLA
+		vidasPantalla = new TextField();
+		vidasPantalla.selectable=false;
+		vidasPantalla.width=300;
+		vidasPantalla.height=100;
+		var tf=new TextFormat('fonts/OratorStd.otf',24,0xFFFFFF);
+		vidasPantalla.setTextFormat(tf);
+		vidasPantalla.defaultTextFormat=tf;
+
+		this.addChild(vidasPantalla);
+		
+		vidasPantalla.x = 50;
+		vidasPantalla.y = 0;
+		
+		refreshVidas();
+	
+	}
+	
+	public function personajeInmune() {
+		zulma.setInmunidad();
+	}
+	
+	public function incrementarVidaPersonaje() {
+		zulma.incrementarVidas();
 	}
 	
 	public function incrementarVelocidad(speed:Float) {
@@ -85,6 +116,7 @@ class RunnerScene extends GameScene {
 			pozo.incrementarVelocidad(speed);
 		for (pozo in pozosActivos)
 			pozo.incrementarVelocidad(speed);
+		zulma.setCorriendo();
 	}
 	
 	public function decrementarVelocidad(speed:Float) {
@@ -100,6 +132,7 @@ class RunnerScene extends GameScene {
 			pozo.decrementarVelocidad(speed);
 		for (pozo in pozosActivos)
 			pozo.decrementarVelocidad(speed);
+		zulma.setCorriendo();
 	}
 	
 	override public function updateLogic(time:Float) {
@@ -113,7 +146,7 @@ class RunnerScene extends GameScene {
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(20) + 3;
+			powerTimer = Std.random(12) + 1;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}
