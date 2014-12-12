@@ -9,7 +9,7 @@ import openfl.text.TextFormat;
  */
 class BossScene extends GameScene {
 	
-	var jefe:Boss;
+	public var jefe:Boss;
 	
 	public function new() {
 		super();
@@ -79,4 +79,5 @@ class BossScene extends GameScene {
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);		
 	}
+	
 }

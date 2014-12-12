@@ -74,7 +74,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-		nextBoss = 3000; //Aca setea el tiempo hasta el boss
+		nextBoss = 3500; //Aca setea el tiempo hasta el boss
 		
 				
 			//VIDAS EN PANTALLA
@@ -146,7 +146,7 @@ class RunnerScene extends GameScene {
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(12) + 1;
+			powerTimer = Std.random(12) + 15;
 			if (powerUps.length > 0)
 				powerUps.pop().mostrar();
 		}
@@ -159,12 +159,11 @@ class RunnerScene extends GameScene {
 		}
 		
 		timeToBoss++;
-		//trace(timeToBoss);
+		trace(timeToBoss);
 		if (timeToBoss == nextBoss) {
 			timeToBoss = 0;
 			nextBoss += nextBoss;
 			HastaElMaipo.getInstance().setScene('boss');
-			//trace("boss");
 		}
 	}
 	

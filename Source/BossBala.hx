@@ -48,20 +48,26 @@ class BossBala extends GameElement {
 		super.updateLogic(time);
 		
 		this.x -= 200 * time;
-		//for (enemigo in escena.enemigosActivos) {
-			//if (GameScene.detectarColision(this, enemigo)) {
-				//imagen.visible = false;
-				//pool.push(this);
-				//enemigo.morir();
-				//this.visible = false;
-			//}	
-		//}
 		if (this.x < -100) {
-			//trace ("se guardo bala boss");
-			pool.push(this);
-			this.visible = false;
-			this.imagen.visible = false;
+			desaparecerBossBala(this);
 		}
+		
+		if (GameScene.detectarColision(this, escena.zulma)) {
+			escena.zulma.decrementarVidas();
+			desaparecerBossBala(this);
+			if (!escena.zulma.isAlive()) {
+				Persistence.setVidas(1);
+				SoundManager.getInstance().playSound("die");
+				escena.setEstado(3); /*Estado perdi*/
+			}
+		}
+		
+	}
+	
+	public static function desaparecerBossBala(bb:BossBala) {
+		pool.push(bb);
+		bb.visible = false;
+		bb.imagen.visible = false;
 	}
 	
 }

@@ -47,19 +47,24 @@ class GatoBala extends GameElement {
 		super.updateLogic(time);
 		
 		this.x += 200 * time;
-		//for (enemigo in escena.enemigosActivos) {
-			//if (GameScene.detectarColision(this, enemigo)) {
-				//imagen.visible = false;
-				//pool.push(this);
-				//enemigo.morir();
-				//this.visible = false;
-			//}	
-		//}
 		if (this.x > 900) {
-			pool.push(this);
-			this.visible = false;
-			this.imagen.visible = false;
+			desaparecerGatoBala(this);
 		}
+		if (GameScene.detectarColision(this, escena.jefe)) {
+			escena.jefe.decrementarVidas();
+			desaparecerGatoBala(this);
+			if (!escena.jefe.isAlive()) {
+				SoundManager.getInstance().playSound("enemydie");
+				HastaElMaipo.getInstance().setScene('game');
+				escena.jefe.resetVidas();
+			}
+		}
+	}
+	
+	public static function desaparecerGatoBala(gb:GatoBala) {
+		pool.push(gb);
+		gb.visible = false;
+		gb.imagen.visible = false;
 	}
 	
 }

@@ -18,7 +18,7 @@ class Persistence {
 	}
 	
 	public static function setVidas(vidas:Int){
-		data.data.vidas=vidas;
+		data.data.vidas = vidas;
 		try{
 			data.flush();
 		}catch(e:Dynamic){

@@ -14,8 +14,6 @@ class HelpScene extends Scene {
 
 	public function new(){
 		super();
-
-		
 	}
 
 }

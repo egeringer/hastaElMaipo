@@ -180,13 +180,9 @@ class Zulma extends GameElement{
 		if (InputManager.getInstance().keyPressed('E')) {
 			var gb = GatoBala.getGatoBala();
 			if (gb != null) {
-				//trace ("salio");
 				gb.x = this.x;
 				gb.y = this.y;
-			} 
-			//else {
-				//trace ("no hay gato");
-			//}
+			}
 		}
 		
 	}

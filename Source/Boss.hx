@@ -63,4 +63,19 @@ class Boss extends GameElement {
 		}
 	}
 	
+	public function decrementarVidas() {
+		cantVidas--;
+	}
+	
+	public function isAlive() {
+		trace(cantVidas);
+		if (cantVidas > 0)
+			return true;
+		return false;
+	}
+	
+	public function resetVidas() {
+		cantVidas = 5;
+	}
+
 }

@@ -25,13 +25,12 @@ class HastaElMaipo extends engine.SceneManager {
 		stage.addEventListener(flash.events.Event.ENTER_FRAME,gameLoop);
 		InputManager.getInstance().suscribe(stage);
 
-		
 		//Seteo las escenas
 
 		sceneMap.set('empresa', new Empresa());
-		sceneMap.set('game', new GameScene());
+		sceneMap.set('game', new GameScene());	//¿Por que hay dos "game" con dos intancias distintas?
+		sceneMap.set('game', new RunnerScene());
 		sceneMap.set('pausa', new PauseScene());
-		sceneMap.set('game',new RunnerScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
 		

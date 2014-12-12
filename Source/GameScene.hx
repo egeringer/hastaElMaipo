@@ -10,7 +10,7 @@ import openfl.text.TextFormat;
 
 class GameScene extends Scene {
 
-	private var zulma:Zulma;
+	public var zulma:Zulma;
 	
 	public var enemigos(default,null):Array<Enemigo>;
 	public var enemigosActivos(default, null):Array<Enemigo>;
