@@ -9,6 +9,7 @@ import engine.*;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import motion.Actuate;
+import openfl.media.SoundChannel;
 
 class MenuScene extends Scene {
 
@@ -22,7 +23,7 @@ class MenuScene extends Scene {
 	private var fondo3:FondoAnimado;
 	private var fondo3punto5:FondoAnimado;
 	private var fondo4:FondoAnimado;
-	
+
 	public function new(){
 		super();
 		
@@ -52,7 +53,7 @@ class MenuScene extends Scene {
 		this.addChild(marquee);
 		this.addChild(titulo);
 		this.addChild(jugar);
-		this.addChild(ayuda);
+		//this.addChild(ayuda);
 		
 		hijos.push(marquee);
 		
@@ -66,7 +67,7 @@ class MenuScene extends Scene {
 		jugar.y=265;
 
 		ayuda.x=310;
-		ayuda.y=310;
+		ayuda.y = 310;
 	
 		}
 
@@ -79,17 +80,6 @@ class MenuScene extends Scene {
 	}
 
 	override public function show() {		
-		//motion.Actuate.tween(title, 3, { positionX:positionX + 1, positionY:positionY + 1 } );
-		
-		/*
-		jugar.scaleX=jugar.scaleY=20;
-		jugar.alpha=0;
-		motion.Actuate.tween(jugar,0.2,{scaleX:1,scaleY:1,alpha:1});
-
-		ayuda.rotation=2000;
-		ayuda.alpha=0;
-		motion.Actuate.tween(ayuda,3,{rotation:0,alpha:1}).delay(0.3);
-		*/
 		
 	}
 

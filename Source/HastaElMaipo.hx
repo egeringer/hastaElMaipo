@@ -5,12 +5,9 @@ import flash.Lib;
 import flash.display.Bitmap;
 import openfl.Assets;
 import engine.*;
-import openfl.media.SoundChannel;
 
 class HastaElMaipo extends engine.SceneManager {
 
-	
-	private var backgroundMusic:SoundChannel;
 	private var soundManager:SoundManager;
 	private static var instance:SceneManager = null;
 	
@@ -25,11 +22,20 @@ class HastaElMaipo extends engine.SceneManager {
 		stage.addEventListener(flash.events.Event.ENTER_FRAME,gameLoop);
 		InputManager.getInstance().suscribe(stage);
 
+
 		//Seteo las escenas
 
 		sceneMap.set('empresa', new Empresa());
 		sceneMap.set('game', new GameScene());	//¿Por que hay dos "game" con dos intancias distintas?
 		sceneMap.set('game', new RunnerScene());
+
+		
+		//Seteo las escenas
+
+		sceneMap.set('empresa', new Empresa());
+		sceneMap.set('game', new GameScene());
+		sceneMap.set('intro', new IntroScene());
+
 		sceneMap.set('pausa', new PauseScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
@@ -49,10 +55,7 @@ class HastaElMaipo extends engine.SceneManager {
 		soundManager.addSound("enemydie", Assets.getSound ("enemydie"));
 		
 		stage.addEventListener(openfl.events.Event.RESIZE,onResize);
-		//Le doy play a la banda sonora del juego
-		backgroundMusic = Assets.getSound("main").play(0, 100, null);
-		
-		//Al carajo la musica hasta nuevo aviso
+
 	}
 	
 	public function onResize(_){

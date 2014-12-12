@@ -12,6 +12,7 @@ import engine.*;
 class Enemigo extends GameElement{
 	
 	var volando:Animation;
+	var explotando:Animation;
 	var escena:GameScene;
 	var numero:Int;
 	var velocidad:Float;
@@ -19,14 +20,24 @@ class Enemigo extends GameElement{
 	public function new (scene:GameScene, speed:Float) {
 		super();
 		numero = Std.random(4) + 1;
-		volando = new Animation(Assets.getBitmapData("images/enemigo"+numero+".png"), 1, 1);
+		volando = new Animation(Assets.getBitmapData("images/enemigo" + numero + ".png"), 1, 1);
+		explotando = new Animation(Assets.getBitmapData("images/explosion.png"), 5, 4);
+		
 		this.addChild(volando);
+		this.addChild(explotando);
+		
 		this.hijos.push(volando);
+		this.hijos.push(explotando);
+		
+		explotando.alpha = 0;
+		
 		escena = scene;
 		velocidad = speed;
 	}
 
 	public function morir() {
+		explotando.alpha = 1;
+		volando.alpha = 0;
 		estado=0;
 		escena.enemigos.push(this);
 		escena.enemigosActivos.remove(this);

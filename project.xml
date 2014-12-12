@@ -22,7 +22,8 @@
 		<sound path="powerup.mp3" id="powerup" />		
 		<sound path="fall.mp3" id="fall" />
 		<sound path="enemydie.mp3" id="enemydie" />
-
+		<sound path="resistire-fragmento.mp3" id="resistire" />
+		<sound path="zulma_gritando.mp3" id="zulma_gritando" />
     </assets>
     <assets path="Assets/sounds" rename="sounds" unless="web">
 		<sound path="main.wav" id="main" />
@@ -30,6 +31,8 @@
 		<sound path="powerup.ogg" id="powerup" />
 		<sound path="fall.ogg" id="fall" />
 		<sound path="enemydie.ogg" id="enemydie" />
+		<sound path="resistire-fragmento.ogg" id="resistire" />
+		<sound path="zulma_gritando.ogg" id="zulma_gritando" />
     </assets>
 
 	
