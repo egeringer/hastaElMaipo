@@ -74,12 +74,7 @@ class RunnerScene extends GameScene {
 		//GatoBala.init(this);
 		
 		timeToBoss = 0;
-<<<<<<< HEAD
 		nextBoss = 3500; //Aca setea el tiempo hasta el boss
-=======
-		nextBoss = 1000; //Aca setea el tiempo hasta el boss
->>>>>>> origin/master
-		
 				
 			//VIDAS EN PANTALLA
 		vidasPantalla = new TextField();
