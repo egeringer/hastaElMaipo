@@ -68,7 +68,6 @@ class Boss extends GameElement {
 	}
 	
 	public function isAlive() {
-		trace(cantVidas);
 		if (cantVidas > 0)
 			return true;
 		return false;

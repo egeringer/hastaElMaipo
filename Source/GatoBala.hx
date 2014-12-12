@@ -55,7 +55,7 @@ class GatoBala extends GameElement {
 			desaparecerGatoBala(this);
 			if (!escena.jefe.isAlive()) {
 				SoundManager.getInstance().playSound("enemydie");
-				HastaElMaipo.getInstance().setScene('game');
+				HastaElMaipo.getInstance().setScene('win');
 				escena.jefe.resetVidas();
 			}
 		}

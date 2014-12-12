@@ -166,7 +166,7 @@ class IntroScene extends GameScene {
 		motion.Actuate.tween (enemigo3, 2, { alpha:0, x:0, y:240 }, false ).delay(50);
 		
 		//zulma dice que le robaron todo .onComplete(ir menu)
-		motion.Actuate.tween(dialogo, 2, { alpha:1 } ).delay(51);
+		motion.Actuate.tween(dialogo, 2, { alpha:1 }, false ).delay(51);
 		motion.Actuate.tween (texto_zulma4, 2, { alpha: 1 }, false).delay(51).onComplete (function() ir_menu());	
 		}	 
 	

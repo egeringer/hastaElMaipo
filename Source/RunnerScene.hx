@@ -14,11 +14,22 @@ class RunnerScene extends GameScene {
 	private var powerTimer:Float;
 	private var pozoTimer:Float;
 	
+	private var power1:PowerUp;
+	private var power2:PowerUp;
+	private var power3:PowerUp;
+	private var power4:PowerUp;
+	private var power5:PowerUp;
+	private var power6:PowerUp;
+	
+	private var numeroPower:Int;
+	
 	public function new() {
 		super();
 	}
 	
 	override function initScene() {
+		
+		numeroPower=1;
 		
 		setEstado(1); /*Jugando*/
 		
@@ -45,9 +56,14 @@ class RunnerScene extends GameScene {
 		powerUps = new Array<PowerUp>();
 		powersActivos = new Array<PowerUp>();
 						
-		powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
-		powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
-		powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
+		power1 = new PUVida(this, "images/power_life.png", 200, 1);
+		power2 = new PUVelocidad(this, "images/power_velocity.png", 200, 10);
+		power3 = new PUDefensa(this, "images/power_defense.png", 200, 14);
+		power4 = new PUVida(this, "images/power_life.png", 200, 1);
+		power5 = new PUVelocidad(this, "images/power_velocity.png", 200, 10);
+		power6 = new PUDefensa(this, "images/power_defense.png", 200, 14);
+		
+		
 		powerUps.push(new PUVida(this, "images/power_life.png", 200, 1));
 		powerUps.push(new PUVelocidad(this, "images/power_velocity.png", 200, 10));
 		powerUps.push(new PUDefensa(this, "images/power_defense.png", 200, 14));
@@ -147,9 +163,15 @@ class RunnerScene extends GameScene {
 		
 		powerTimer -= time;
 		if (powerTimer < 0) {
-			powerTimer = Std.random(12) + 15;
-			if (powerUps.length > 0)
-				powerUps.pop().mostrar();
+			powerTimer = Std.random(15) + 2;
+			if(numeroPower == 1) power1.mostrar();
+			if(numeroPower == 2) power2.mostrar();
+			if(numeroPower == 3) power3.mostrar();
+			if(numeroPower == 4) power4.mostrar();
+			if(numeroPower == 5) power5.mostrar();
+			if(numeroPower == 6) power6.mostrar();
+			if(numeroPower > 7) powerUps.pop().mostrar();
+			numeroPower++;
 		}
 		
 		pozoTimer -= time;

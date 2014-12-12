@@ -36,8 +36,8 @@ class Enemigo extends GameElement{
 	}
 
 	public function morir() {
-		explotando.alpha = 1;
-		volando.alpha = 0;
+		//explotando.alpha = 1;
+		//volando.alpha = 0;
 		estado=0;
 		escena.enemigos.push(this);
 		escena.enemigosActivos.remove(this);
@@ -46,6 +46,8 @@ class Enemigo extends GameElement{
 	}
 
 	public function atacar(){
+		//explotando.alpha = 0;
+		//volando.alpha = 1;
 		this.x = 1500;
 		this.y = escena.height - this.height - 36;//51 es la altura del piso
 		this.estado=1;
