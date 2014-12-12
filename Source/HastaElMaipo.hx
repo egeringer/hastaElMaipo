@@ -39,12 +39,13 @@ class HastaElMaipo extends engine.SceneManager {
 		sceneMap.set('pausa', new PauseScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('die', new DieScene());
+		sceneMap.set('win', new WinScene());
 		
 		sceneMap.set('boss', new BossScene());
 		//sceneMap.set('help',new HelpScene());
 		
 		//Empiezo el juego
-		setScene('empresa');
+		setScene('win');
 		
 		//Seteo los sonidos
 		soundManager = SoundManager.getInstance();
