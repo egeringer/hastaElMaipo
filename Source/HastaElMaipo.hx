@@ -26,7 +26,8 @@ class HastaElMaipo extends engine.SceneManager {
 		//Seteo las escenas
 
 		sceneMap.set('empresa', new Empresa());
-		sceneMap.set('game', new GameScene());	//¿Por que hay dos "game" con dos intancias distintas?
+		//sceneMap.set('game', new GameScene());
+		//¿Por que hay dos "game" con dos intancias distintas?
 		sceneMap.set('game', new RunnerScene());
 
 		
