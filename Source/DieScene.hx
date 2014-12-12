@@ -43,7 +43,7 @@ class DieScene extends Scene {
 		hijos.push(fondo4);
 
 		marquee = new Animation(Assets.getBitmapData("images/menu-marquee.png"), 2, 1);
-		reintentar=new Boton(0xFF0000,300,100,"images/menu-reintentar.png",play);
+		reintentar=new Boton(0xFF0000,408,57,"images/menu-reintentar.png",play);
 		irMenu=new Boton(0x00FF00,300,100,"images/menu-ir-home.png",goToMenu);
 		
 		this.addChild(marquee);
@@ -63,7 +63,7 @@ class DieScene extends Scene {
 				
 		puntaje = new TextField();
 		puntaje.selectable=false;
-		puntaje.width=300;
+		puntaje.width=500;
 		puntaje.height=100;
 		var tf=new TextFormat('fonts/OratorStd.otf',24,0x000000);
 		puntaje.setTextFormat(tf);
@@ -71,7 +71,7 @@ class DieScene extends Scene {
 
 		this.addChild(puntaje);
 		
-		puntaje.x =250;
+		puntaje.x =180;
 		puntaje.y =186;
 		
 	}
@@ -85,7 +85,7 @@ class DieScene extends Scene {
 	}
 
 	override public function show() {
-		puntaje.text=Persistence.getScore()+' ZULMETROS';
+		puntaje.text='RECORD: '+Persistence.getScore()/100+' ZULMETROS';
 	}
 
 }

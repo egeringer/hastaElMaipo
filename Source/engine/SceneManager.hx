@@ -13,11 +13,13 @@ import flash.geom.Point;
 class SceneManager extends GameElement {
 
 	var currentScene:Scene;
-	public var sceneMap(default,null):Map<String,Scene>;
+	public var sceneMap(default, null):Map<String,Scene>;
+	private var sceneName:String;
 
 	private function new(){
 		super();
-		currentScene=null;
+		currentScene = null;
+		sceneName = "";
 		sceneMap=new Map<String,Scene>();
 	}
 
@@ -34,11 +36,16 @@ class SceneManager extends GameElement {
 			currentScene=null;
 		}
 
-		currentScene=sceneMap.get(name);
+		currentScene = sceneMap.get(name);
+		sceneName = name;
 		this.addChild(currentScene);
 		this.hijos.push(currentScene);
 		currentScene.show();
 	}
+	
+	public function getScene():String {
+		return sceneName;
+		}
 
 
 }

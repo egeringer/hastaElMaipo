@@ -11,6 +11,7 @@ class Zulma extends GameElement{
 	//Animaciones PowerUps
 	var inmune:Animation;
 	var corriendo:Animation;
+	var parada:Animation;
 	
 	var escena:GameScene;
 	var shootTimer:Float;
@@ -27,14 +28,17 @@ class Zulma extends GameElement{
 		caminando = new Animation(Assets.getBitmapData("images/zulma_caminando.png"), 6, 1);	
 		corriendo = new Animation(Assets.getBitmapData("images/zulma_corriendo.png"), 6, 1);
 		inmune = new Animation(Assets.getBitmapData("images/zulma_defendiendo.png"), 6, 1);
+		parada = new Animation(Assets.getBitmapData("images/zulma_parada.png"), 1, 1);
 		
 		caminando.alpha = 1;
 		corriendo.alpha = 0;
 		inmune.alpha = 0;
+		parada.alpha = 0;
 		
 		this.addChild(corriendo);
 		this.addChild(inmune);
 		this.addChild(caminando);
+		this.addChild(parada);
 		
 		this.x = 50;
 		this.y = escena.height - this.height - 51; //51 es la altura del piso.
@@ -42,6 +46,7 @@ class Zulma extends GameElement{
 		hijos.push(caminando);
 		hijos.push(corriendo);
 		hijos.push(inmune);
+		hijos.push(parada);
 		
 		shootTimer = 0;
 		
@@ -59,16 +64,25 @@ class Zulma extends GameElement{
 		esCorriendo = false;
 	}
 	
+	public function setParada() {
+		this.caminando.alpha = 0;
+		this.corriendo.alpha = 0;
+		this.inmune.alpha = 0;
+		this.parada.alpha = 1;
+	}
+	
 	public function setInmunidad() {
 		esInmune = !esInmune;
 		if (esInmune) {
 			this.caminando.alpha = 0;
 			this.corriendo.alpha = 0;
 			this.inmune.alpha = 1;
+			this.parada.alpha = 0;
 		}else {
 			this.caminando.alpha = 1;
 			this.corriendo.alpha = 0;
 			this.inmune.alpha = 0;
+			this.parada.alpha = 0;
 		}
 	}
 	
@@ -78,10 +92,12 @@ class Zulma extends GameElement{
 			this.caminando.alpha = 0;
 			this.corriendo.alpha = 1;
 			this.inmune.alpha = 0;
+			this.parada.alpha = 0;
 		}else {
 			this.caminando.alpha = 1;
 			this.corriendo.alpha = 0;
 			this.inmune.alpha = 0;
+			this.parada.alpha = 0;
 		}
 	}
 	
